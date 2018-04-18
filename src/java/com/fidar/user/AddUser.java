@@ -6,6 +6,7 @@
 package com.fidar.user;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,8 +18,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author alirzea
  */
-@WebServlet(name = "UserLogin", urlPatterns = {"/UserLogin"})
-public class UserLogin extends HttpServlet {
+@WebServlet(name = "AddUser", urlPatterns = {"/AddUser"})
+public class AddUser extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -31,14 +32,7 @@ public class UserLogin extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
-        
-        
-        // proccess for identification and redirect to correct page
-        
-        
-        RequestDispatcher dispatcher = request.getRequestDispatcher("dashboard.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("adduser.jsp");
         dispatcher.forward(request, response);
     }
 

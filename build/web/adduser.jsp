@@ -1,6 +1,6 @@
 <%-- 
-    Document   : dashboard
-    Created on : Apr 16, 2018, 12:16:44 PM
+    Document   : adduser
+    Created on : Apr 18, 2018, 11:30:37 AM
     Author     : alirzea
 --%>
 
@@ -126,126 +126,43 @@
         <div class="page-wrapper" style="height:1200px;">
             <!-- Container fluid  -->
             <div class="container-fluid">
-                <!-- Start Page Content -->
-                <!-- Chart -->
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="card">
-                            <div class="card-title">
-                                <h4>Pie chart</h4>
-                            </div>
-                            <div class="panel-body">
-                                <canvas id="pieChart"></canvas>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-8">
-                        <div class="card">
-                            <div class="card-title">
-                                <h4>Bar chart</h4>
-                            </div>
-                            <div class="panel-body">
-                                <canvas id="barChart"></canvas>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Finish chart -->
-                <!-- Table of services -->
                 <div class="row">
                     <div class="col-md-6">
                         <div class="card">
                             <div class="card-title">
-                                <h4>Table of current services </h4>
+                                <h4>Add User</h4>
                             </div>
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <table class="table">
-                                        <thead>
-                                            <tr>
-                                                <th>#</th>
-                                                <th>Name</th>
-                                                <th>Owner</th>
-                                                <th>Admin</th>
-                                                <th>Revenue</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <th scope="row">1</th>
-                                                <td>Golnakhorim</td>
-                                                <td><span class="badge badge-primary">Morteza</span></td>
-                                                <td>Vasfa</td>
-                                                <td class="color-primary">6,000,000 T</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">2</th>
-                                                <td>Golnakhorim</td>
-                                                <td><span class="badge badge-primary">Morteza</span></td>
-                                                <td>Vasfa</td>
-                                                <td class="color-primary">6,000,000 T</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">3</th>
-                                                <td>Golnakhorim</td>
-                                                <td><span class="badge badge-inverse">Morteza</span></td>
-                                                <td>Vasfa</td>
-                                                <td class="color-primary">6,000,000 T</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
+                            <div class="panel-body">
+                                <form>
+                                    <div class="form-group">
+                                        <label>Username</label>
+                                        <input type="text" class="form-control" placeholder="Username">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Password</label>
+                                        <input type="text" class="form-control" placeholder="Password">
+                                    </div>
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox"> Check me out
+                                        </label>
+                                    </div>
+                                    <button type="submit" class="btn btn-default">Submit</button>
+                                </form>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="card">
                             <div class="card-title">
-                                <h4>Table of current services </h4>
+                                <h4>Add User</h4>
                             </div>
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <table class="table">
-                                        <thead>
-                                            <tr>
-                                                <th>#</th>
-                                                <th>Name</th>
-                                                <th>Owner</th>
-                                                <th>Admin</th>
-                                                <th>Revenue</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <th scope="row">1</th>
-                                                <td>Golnakhorim</td>
-                                                <td><span class="badge badge-primary">Morteza</span></td>
-                                                <td>Vasfa</td>
-                                                <td class="color-primary">6,000,000 T</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">2</th>
-                                                <td>Golnakhorim</td>
-                                                <td><span class="badge badge-primary">Morteza</span></td>
-                                                <td>Vasfa</td>
-                                                <td class="color-primary">6,000,000 T</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">3</th>
-                                                <td>Golnakhorim</td>
-                                                <td><span class="badge badge-inverse">Morteza</span></td>
-                                                <td>Vasfa</td>
-                                                <td class="color-primary">6,000,000 T</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
+                            <div class="panel-body">
+                                
                             </div>
                         </div>
                     </div>
                 </div>
-                <!-- Finish table of services -->
-                <!-- End PAge Content -->
             </div>
             <!-- End Container fluid  -->
             <!-- footer -->
@@ -355,3 +272,4 @@
 </body>
 
 </html>
+

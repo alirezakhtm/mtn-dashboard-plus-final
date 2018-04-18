@@ -153,7 +153,52 @@
                 <!-- Finish chart -->
                 <!-- Table of services -->
                 <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-title">
+                                <h4>Table of current services </h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Name</th>
+                                                <th>Owner</th>
+                                                <th>Admin</th>
+                                                <th>Revenue</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th scope="row">1</th>
+                                                <td>Golnakhorim</td>
+                                                <td><span class="badge badge-primary">Morteza</span></td>
+                                                <td>Vasfa</td>
+                                                <td class="color-primary">6,000,000 T</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">2</th>
+                                                <td>Golnakhorim</td>
+                                                <td><span class="badge badge-primary">Morteza</span></td>
+                                                <td>Vasfa</td>
+                                                <td class="color-primary">6,000,000 T</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">3</th>
+                                                <td>Golnakhorim</td>
+                                                <td><span class="badge badge-inverse">Morteza</span></td>
+                                                <td>Vasfa</td>
+                                                <td class="color-primary">6,000,000 T</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
                         <div class="card">
                             <div class="card-title">
                                 <h4>Table of current services </h4>
@@ -200,18 +245,11 @@
                     </div>
                 </div>
                 <!-- Finish table of services -->
-                <div class="row">
-                    <div class="col-12">
-                        <div class="card">
-                            <div class="card-body"> This is some text within a card block. </div>
-                        </div>
-                    </div>
-                </div>
                 <!-- End PAge Content -->
             </div>
             <!-- End Container fluid  -->
             <!-- footer -->
-            <footer class="footer"> © 2018 All rights reserved. Designed by <a href="https://colorlib.com">Fidar Co.</a></footer>
+            <%@include file="absolutefooter.jsp" %>
             <!-- End footer -->
         </div>
         <!-- End Page wrapper  -->
@@ -285,7 +323,7 @@
 	var myChart = new Chart( ctx, {
             type: 'bar',
             data: {
-                labels: [ "January", "February", "March", "April", "May", "June", "July" ],
+                labels: [ "January", "February", "Alireza", "April", "May", "June", "July" ],
                 datasets: [
                     {
                         label: "My First dataset",

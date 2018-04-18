@@ -14,16 +14,16 @@
                 <li class="nav-label">Home</li>
                 <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-tachometer"></i><span class="hide-menu">Dashboard </span></a>
                     <ul aria-expanded="false" class="collapse">
-                        <li><a href="index.html">Report </a></li>
+                        <li><a href="UserLogin">Report </a></li>
                     </ul>
                 </li>
                 <li class="nav-label">Users</li>
                 <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-suitcase"></i><span class="hide-menu">Account</span></a>
                     <ul aria-expanded="false" class="collapse">
-                        <li><a href="#">Add User</a></li>
+                        <li><a href="AddUser">Add User</a></li>
                     </ul>
                 </li>
-                <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-envelope"></i><span class="hide-menu">Message</span></a>
+                <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-envelope"></i><span class="hide-menu">Concept</span></a>
                     <ul aria-expanded="false" class="collapse">
                         <li><a href="chart-flot.html">Confirm</a></li>
                     </ul>
@@ -35,7 +35,7 @@
                         <li><a href="ui-alert.html">Chart</a></li>
                     </ul>
                 </li>
-                <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-suitcase"></i><span class="hide-menu">Message</span></a>
+                <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-suitcase"></i><span class="hide-menu">Concept</span></a>
                     <ul aria-expanded="false" class="collapse">
                         <li><a href="uc-calender.html">Upload</a></li>
                     </ul>
