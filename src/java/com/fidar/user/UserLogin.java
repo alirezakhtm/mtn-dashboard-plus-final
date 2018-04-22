@@ -5,6 +5,8 @@
  */
 package com.fidar.user;
 
+import com.fidar.database.DBHandler;
+import com.fidar.security.SecurityOrder;
 import java.io.IOException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -20,6 +22,9 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "UserLogin", urlPatterns = {"/UserLogin"})
 public class UserLogin extends HttpServlet {
 
+    private DBHandler db = new DBHandler();
+    private SecurityOrder securityOrder = new SecurityOrder();
+    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -31,12 +36,13 @@ public class UserLogin extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
+        
+        
+        securityOrder.pushUserInSession(request);
+        
         
         
         // proccess for identification and redirect to correct page
-        
         
         RequestDispatcher dispatcher = request.getRequestDispatcher("dashboard.jsp");
         dispatcher.forward(request, response);
