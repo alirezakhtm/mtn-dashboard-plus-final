@@ -38,7 +38,9 @@ public class AddUser extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
-        ConstantParameters answer = securityOrder.whoIsUser(session.getAttribute("username").toString(), session.getAttribute("password").toString());
+        String username = (String)session.getAttribute("username");
+        String password = (String)session.getAttribute("password");
+        ConstantParameters answer = securityOrder.whoIsUser(username, password);
         if(!answer.equals(ConstantParameters.USER_UNKNOWN) && !answer.equals(ConstantParameters.USER_SIMPLE)){
             RequestDispatcher dispatcher = request.getRequestDispatcher("adduser.jsp");
             dispatcher.forward(request, response);

@@ -130,24 +130,29 @@
                     <div class="col-md-6">
                         <div class="card">
                             <div class="card-title">
-                                <h4>Add User</h4>
+                                <h4>Add Simple User</h4>
                             </div>
                             <div class="panel-body">
                                 <form>
                                     <div class="form-group">
                                         <label>Username</label>
-                                        <input type="text" class="form-control" placeholder="Username">
+                                        <input type="text" class="form-control" placeholder="Username" name="username">
                                     </div>
                                     <div class="form-group">
                                         <label>Password</label>
-                                        <input type="text" class="form-control" placeholder="Password">
+                                        <input type="text" class="form-control" placeholder="Password" name="password">
                                     </div>
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox"> Check me out
-                                        </label>
+                                    <div class="from-group">
+                                        <label>Service name</label>
+                                        <select class="form-control" name="serviceSelecter">
+                                            <option>yazd1</option>
+                                            <option>yazd2</option>
+                                            <option>yazd3</option>
+                                            <option>yazd4</option>
+                                        </select>
                                     </div>
-                                    <button type="submit" class="btn btn-default">Submit</button>
+                                    <br/>
+                                    <button type="submit" class="btn btn-success">Create Account</button>
                                 </form>
                             </div>
                         </div>
