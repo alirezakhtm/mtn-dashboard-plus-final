@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.fidar.user;
+package com.fidar.report;
 
 import com.fidar.database.ConstantParameters;
 import com.fidar.security.SecurityOrder;
@@ -20,8 +20,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author alirzea
  */
-@WebServlet(name = "AddUser", urlPatterns = {"/AddUser"})
-public class AddUser extends HttpServlet {
+@WebServlet(name = "DailyReport", urlPatterns = {"/DailyReport"})
+public class DailyReport extends HttpServlet {
 
     private SecurityOrder securityOrder = new SecurityOrder();
     
@@ -40,8 +40,8 @@ public class AddUser extends HttpServlet {
         String username = (String)session.getAttribute("username");
         String password = (String)session.getAttribute("password");
         ConstantParameters answer = securityOrder.whoIsUser(username, password);
-        if(!answer.equals(ConstantParameters.USER_UNKNOWN) && !answer.equals(ConstantParameters.USER_SIMPLE)){
-            RequestDispatcher dispatcher = request.getRequestDispatcher("adduser.jsp");
+        if(!answer.equals(ConstantParameters.USER_UNKNOWN)){
+            RequestDispatcher dispatcher = request.getRequestDispatcher("dailyreport.jsp");
             dispatcher.forward(request, response);
         }else{
             securityOrder.logOutUser(request);

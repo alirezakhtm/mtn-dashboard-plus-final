@@ -1,6 +1,6 @@
 <%-- 
-    Document   : adduser
-    Created on : Apr 18, 2018, 11:30:37 AM
+    Document   : dailyreport
+    Created on : Apr 30, 2018, 10:58:06 AM
     Author     : alirzea
 --%>
 
@@ -127,21 +127,13 @@
             <!-- Container fluid  -->
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                         <div class="card">
                             <div class="card-title">
                                 <h4>Add Simple User</h4>
                             </div>
                             <div class="panel-body">
                                 <form>
-                                    <div class="form-group">
-                                        <label>Username</label>
-                                        <input type="text" class="form-control" placeholder="Username" name="username">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Password</label>
-                                        <input type="text" class="form-control" placeholder="Password" name="password">
-                                    </div>
                                     <div class="from-group">
                                         <label>Service name</label>
                                         <select class="form-control" name="serviceSelecter">
@@ -152,37 +144,7 @@
                                         </select>
                                     </div>
                                     <br/>
-                                    <button type="submit" class="btn btn-success">Create Account</button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="card">
-                            <div class="card-title">
-                                <h4>Add Admin User</h4>
-                            </div>
-                            <div class="panel-body">
-                                <form>
-                                    <div class="form-group">
-                                        <label>Username</label>
-                                        <input type="text" class="form-control" placeholder="Username" name="username">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Password</label>
-                                        <input type="text" class="form-control" placeholder="Password" name="password">
-                                    </div>
-                                    <div class="from-group">
-                                        <label>Service name</label>
-                                        <select class="form-control" name="serviceSelecter">
-                                            <option>yazd1</option>
-                                            <option>yazd2</option>
-                                            <option>yazd3</option>
-                                            <option>yazd4</option>
-                                        </select>
-                                    </div>
-                                    <br/>
-                                    <button type="submit" class="btn btn-success">Create Account</button>
+                                    <button type="submit" class="btn btn-success">Generate Report</button>
                                 </form>
                             </div>
                         </div>
@@ -190,61 +152,81 @@
                 </div>
                 <!-- second row -->
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                         <div class="card">
                             <div class="card-title">
-                                <h4>Add Master User</h4>
+                                <h4>Table Basic </h4>
+
                             </div>
-                            <div class="panel-body">
-                                <form>
-                                    <div class="form-group">
-                                        <label>Username</label>
-                                        <input type="text" class="form-control" placeholder="Username" name="username">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Password</label>
-                                        <input type="text" class="form-control" placeholder="Password" name="password">
-                                    </div>
-                                    <br/>
-                                    <button type="submit" class="btn btn-success">Create Account</button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="card">
-                            <div class="card-title">
-                                <h4>Update Admin User</h4>
-                            </div>
-                            <div class="panel-body">
-                                <form>
-                                    <div class="from-group">
-                                        <label>Username</label>
-                                        <select class="form-control" name="serviceSelecter">
-                                            <option>Admin1</option>
-                                            <option>Admin2</option>
-                                            <option>Admin3</option>
-                                            <option>Asmin4</option>
-                                        </select>
-                                    </div>
-                                    <div class="from-group">
-                                        <label>Service name</label>
-                                        <select class="form-control" name="serviceSelecter">
-                                            <option>yazd1</option>
-                                            <option>yazd2</option>
-                                            <option>yazd3</option>
-                                            <option>yazd4</option>
-                                        </select>
-                                    </div>
-                                    <br/>
-                                    <button type="submit" class="btn btn-success">Update Access</button>
-                                    <button type="submit" class="btn btn-success">Delete Access</button>
-                                    <button type="submit" class="btn btn-success">Reset Password</button>
-                                </form>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Name</th>
+                                                <th>Status</th>
+                                                <th>Date</th>
+                                                <th>Price</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th scope="row">1</th>
+                                                <td>Kolor Tea Shirt For Man</td>
+                                                <td><span class="badge badge-primary">Sale</span></td>
+                                                <td>January 22</td>
+                                                <td class="color-primary">$21.56</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">2</th>
+                                                <td>Kolor Tea Shirt For Women</td>
+                                                <td><span class="badge badge-success">Tax</span></td>
+                                                <td>January 30</td>
+                                                <td class="color-success">$55.32</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">3</th>
+                                                <td>Blue Backpack For Baby</td>
+                                                <td><span class="badge badge-danger">Extended</span></td>
+                                                <td>January 25</td>
+                                                <td class="color-danger">$14.85</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                <!-- third row -->
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-title">
+                                <h4>Details</h4>
+                            </div>
+                            <div class="panel-body">
+                                <p><b>Revenue:</b> 180,000</p>
+                                <p><b>Total Sub. User:</b> 180,000</p>
+                                <p><b>Total Active User:</b> 180,000</p>
+                                <p><b>New Sub. User:</b> 180,000</p>
+                                <p><b>New UnSub. User:</b> 180,000</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-title">
+                                <h4>Bar chart</h4>
+                            </div>
+                            <div class="panel-body">
+                                <canvas id="barChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
             </div>
             <!-- End Container fluid  -->
             <!-- footer -->
@@ -267,18 +249,7 @@
     <script src="js/lib/sticky-kit-master/dist/sticky-kit.min.js"></script>
     <!--Custom JavaScript -->
     <script src="js/custom.min.js"></script>
-    <!-- Pie chart - java script file-->
-    <!--<script src="js/lib/flot-chart/jquery.flot.pie.js"></script>-->
-    <!--  flot-chart js -->
-<!--    <script src="js/lib/flot-chart/excanvas.min.js"></script>
-    <script src="js/lib/flot-chart/jquery.flot.js"></script>
-    <script src="js/lib/flot-chart/jquery.flot.pie.js"></script>
-    <script src="js/lib/flot-chart/jquery.flot.time.js"></script>
-    <script src="js/lib/flot-chart/jquery.flot.stack.js"></script>
-    <script src="js/lib/flot-chart/jquery.flot.resize.js"></script>
-    <script src="js/lib/flot-chart/jquery.flot.crosshair.js"></script>
-    <script src="js/lib/flot-chart/curvedLines.js"></script>
-    <script src="js/lib/flot-chart/flot-tooltip/jquery.flot.tooltip.min.js"></script>-->
+    
     <script src="js/lib/chart-js/Chart.bundle.js"></script>
     <script>
         //pie chart

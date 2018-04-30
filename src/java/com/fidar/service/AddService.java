@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.fidar.user;
+package com.fidar.service;
 
 import com.fidar.database.ConstantParameters;
 import com.fidar.security.SecurityOrder;
@@ -20,8 +20,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author alirzea
  */
-@WebServlet(name = "AddUser", urlPatterns = {"/AddUser"})
-public class AddUser extends HttpServlet {
+@WebServlet(name = "AddService", urlPatterns = {"/AddService"})
+public class AddService extends HttpServlet {
 
     private SecurityOrder securityOrder = new SecurityOrder();
     
@@ -40,12 +40,13 @@ public class AddUser extends HttpServlet {
         String username = (String)session.getAttribute("username");
         String password = (String)session.getAttribute("password");
         ConstantParameters answer = securityOrder.whoIsUser(username, password);
-        if(!answer.equals(ConstantParameters.USER_UNKNOWN) && !answer.equals(ConstantParameters.USER_SIMPLE)){
-            RequestDispatcher dispatcher = request.getRequestDispatcher("adduser.jsp");
+        RequestDispatcher dispatcher;
+        if(!answer.equals(ConstantParameters.USER_UNKNOWN)){
+            dispatcher = request.getRequestDispatcher("addservice.jsp");
             dispatcher.forward(request, response);
         }else{
             securityOrder.logOutUser(request);
-            RequestDispatcher dispatcher = request.getRequestDispatcher("loginpage.jsp");
+            dispatcher = request.getRequestDispatcher("loginpage.jsp");
             dispatcher.forward(request, response);
         }
     }

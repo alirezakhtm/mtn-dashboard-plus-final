@@ -1,6 +1,6 @@
 <%-- 
-    Document   : adduser
-    Created on : Apr 18, 2018, 11:30:37 AM
+    Document   : addservice
+    Created on : Apr 30, 2018, 12:24:06 PM
     Author     : alirzea
 --%>
 
@@ -158,91 +158,7 @@
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <div class="card">
-                            <div class="card-title">
-                                <h4>Add Admin User</h4>
-                            </div>
-                            <div class="panel-body">
-                                <form>
-                                    <div class="form-group">
-                                        <label>Username</label>
-                                        <input type="text" class="form-control" placeholder="Username" name="username">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Password</label>
-                                        <input type="text" class="form-control" placeholder="Password" name="password">
-                                    </div>
-                                    <div class="from-group">
-                                        <label>Service name</label>
-                                        <select class="form-control" name="serviceSelecter">
-                                            <option>yazd1</option>
-                                            <option>yazd2</option>
-                                            <option>yazd3</option>
-                                            <option>yazd4</option>
-                                        </select>
-                                    </div>
-                                    <br/>
-                                    <button type="submit" class="btn btn-success">Create Account</button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- second row -->
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="card">
-                            <div class="card-title">
-                                <h4>Add Master User</h4>
-                            </div>
-                            <div class="panel-body">
-                                <form>
-                                    <div class="form-group">
-                                        <label>Username</label>
-                                        <input type="text" class="form-control" placeholder="Username" name="username">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Password</label>
-                                        <input type="text" class="form-control" placeholder="Password" name="password">
-                                    </div>
-                                    <br/>
-                                    <button type="submit" class="btn btn-success">Create Account</button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="card">
-                            <div class="card-title">
-                                <h4>Update Admin User</h4>
-                            </div>
-                            <div class="panel-body">
-                                <form>
-                                    <div class="from-group">
-                                        <label>Username</label>
-                                        <select class="form-control" name="serviceSelecter">
-                                            <option>Admin1</option>
-                                            <option>Admin2</option>
-                                            <option>Admin3</option>
-                                            <option>Asmin4</option>
-                                        </select>
-                                    </div>
-                                    <div class="from-group">
-                                        <label>Service name</label>
-                                        <select class="form-control" name="serviceSelecter">
-                                            <option>yazd1</option>
-                                            <option>yazd2</option>
-                                            <option>yazd3</option>
-                                            <option>yazd4</option>
-                                        </select>
-                                    </div>
-                                    <br/>
-                                    <button type="submit" class="btn btn-success">Update Access</button>
-                                    <button type="submit" class="btn btn-success">Delete Access</button>
-                                    <button type="submit" class="btn btn-success">Reset Password</button>
-                                </form>
-                            </div>
-                        </div>
+                        
                     </div>
                 </div>
             </div>

@@ -8,6 +8,7 @@ package com.fidar.user;
 import com.fidar.database.ConstantParameters;
 import com.fidar.security.SecurityOrder;
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,8 +21,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author alirzea
  */
-@WebServlet(name = "AddUser", urlPatterns = {"/AddUser"})
-public class AddUser extends HttpServlet {
+@WebServlet(name = "UserList", urlPatterns = {"/UserList"})
+public class UserList extends HttpServlet {
 
     private SecurityOrder securityOrder = new SecurityOrder();
     
@@ -41,7 +42,7 @@ public class AddUser extends HttpServlet {
         String password = (String)session.getAttribute("password");
         ConstantParameters answer = securityOrder.whoIsUser(username, password);
         if(!answer.equals(ConstantParameters.USER_UNKNOWN) && !answer.equals(ConstantParameters.USER_SIMPLE)){
-            RequestDispatcher dispatcher = request.getRequestDispatcher("adduser.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("userlist.jsp");
             dispatcher.forward(request, response);
         }else{
             securityOrder.logOutUser(request);
