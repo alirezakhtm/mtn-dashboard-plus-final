@@ -1,6 +1,6 @@
 <%-- 
-    Document   : addservice
-    Created on : Apr 30, 2018, 12:24:06 PM
+    Document   : contentconfirm
+    Created on : May 1, 2018, 2:20:51 PM
     Author     : alirzea
 --%>
 
@@ -88,51 +88,10 @@
             <!-- Container fluid  -->
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                         <div class="card">
                             <div class="card-title">
-                                <h4>Add Simple User</h4>
-                            </div>
-                            <div class="panel-body">
-                                <form>
-                                    <div class="form-group">
-                                        <label>Service Name</label>
-                                        <input type="text" class="form-control" placeholder="Username" name="serviceName">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>SPID</label>
-                                        <input type="text" class="form-control" placeholder="SPID" name="spid">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Service ID</label>
-                                        <input type="text" class="form-control" placeholder="Service ID" name="serviceId">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Price (Rial)</label>
-                                        <input type="number" class="form-control" placeholder="Price" name="price">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Correlator ID</label>
-                                        <input type="text" class="form-control" placeholder="Correlator ID" name="correlatorId">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Phone Number</label>
-                                        <input type="tel" class="form-control" placeholder="Phone Number" name="phoneNumber">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Welcome MT</label>
-                                        <textarea class="textarea_editor form-control" rows="8" placeholder="Enter text ..." style="height:450px" name="welcomeMT"></textarea>
-                                    </div>
-                                    <br/>
-                                    <button type="submit" class="btn btn-success">Create Service</button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="card">
-                            <div class="card-title">
-                                <h4>Service List </h4>
+                                <h4>Content List</h4>
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
@@ -196,90 +155,7 @@
     <script src="js/lib/sticky-kit-master/dist/sticky-kit.min.js"></script>
     <!--Custom JavaScript -->
     <script src="js/custom.min.js"></script>
-    <!-- Pie chart - java script file-->
-    <!--<script src="js/lib/flot-chart/jquery.flot.pie.js"></script>-->
-    <!--  flot-chart js -->
-<!--    <script src="js/lib/flot-chart/excanvas.min.js"></script>
-    <script src="js/lib/flot-chart/jquery.flot.js"></script>
-    <script src="js/lib/flot-chart/jquery.flot.pie.js"></script>
-    <script src="js/lib/flot-chart/jquery.flot.time.js"></script>
-    <script src="js/lib/flot-chart/jquery.flot.stack.js"></script>
-    <script src="js/lib/flot-chart/jquery.flot.resize.js"></script>
-    <script src="js/lib/flot-chart/jquery.flot.crosshair.js"></script>
-    <script src="js/lib/flot-chart/curvedLines.js"></script>
-    <script src="js/lib/flot-chart/flot-tooltip/jquery.flot.tooltip.min.js"></script>-->
-    <script src="js/lib/chart-js/Chart.bundle.js"></script>
-    <script>
-        //pie chart
-	var ctx = document.getElementById( "pieChart" );
-	ctx.height = 300;
-	var myChart = new Chart( ctx, {
-		type: 'pie',
-		data: {
-			datasets: [ {
-				data: [ 45, 25, 20, 10 ],
-				backgroundColor: [
-                                    "rgba(0, 123, 255,0.9)",
-                                    "rgba(0, 123, 255,0.7)",
-                                    "rgba(0, 123, 255,0.5)",
-                                    "rgba(0,0,0,0.07)"
-                                ],
-				hoverBackgroundColor: [
-                                    "rgba(0, 123, 255,0.9)",
-                                    "rgba(0, 123, 255,0.7)",
-                                    "rgba(0, 123, 255,0.5)",
-                                    "rgba(0,0,0,0.07)"
-                                ]
-
-                            } ],
-			labels: [
-                            "green",
-                            "green",
-                            "green"
-                        ]
-		},
-		options: {
-			responsive: true
-		}
-	} );
-    </script>
     
-    <script>
-        //bar chart
-	var ctx = document.getElementById( "barChart" );
-	//    ctx.height = 200;
-	var myChart = new Chart( ctx, {
-            type: 'bar',
-            data: {
-                labels: [ "January", "February", "Alireza", "April", "May", "June", "July" ],
-                datasets: [
-                    {
-                        label: "My First dataset",
-                        data: [ 65, 59, 80, 81, 56, 55, 40 ],
-                        borderColor: "rgba(0, 123, 255, 0.9)",
-                        borderWidth: "0",
-                        backgroundColor: "rgba(0, 123, 255, 0.5)"
-                    },
-                    {
-                        label: "My Second dataset",
-                        data: [ 28, 48, 40, 19, 86, 27, 90 ],
-                        borderColor: "rgba(0,0,0,0.09)",
-                        borderWidth: "0",
-                        backgroundColor: "rgba(0,0,0,0.07)"
-                    }
-                ]
-            },
-            options: {
-                scales: {
-                    yAxes: [ {
-                        ticks: {
-                            beginAtZero: true
-                        }
-                    } ]
-                }
-            }
-	} );
-    </script>
 </body>
 
 </html>

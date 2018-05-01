@@ -62,46 +62,7 @@
 				<div class="notify"> <span class="heartbit"></span> <span class="point"></span> </div>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right mailbox animated zoomIn">
-                                <ul>
-                                    <li>
-                                        <div class="drop-title">Notifications</div>
-                                    </li>
-                                    <li>
-                                        <div class="message-center">
-                                            <!-- Message -->
-                                            <a href="#">
-                                                <div class="btn btn-danger btn-circle m-r-10"><i class="fa fa-link"></i></div>
-                                                <div class="mail-contnet">
-                                                    <h5>This is title</h5> <span class="mail-desc">Just see the my new admin!</span> <span class="time">9:30 AM</span>
-                                                </div>
-                                            </a>
-                                            <!-- Message -->
-                                            <a href="#">
-                                                <div class="btn btn-success btn-circle m-r-10"><i class="ti-calendar"></i></div>
-                                                <div class="mail-contnet">
-                                                    <h5>This is another title</h5> <span class="mail-desc">Just a reminder that you have event</span> <span class="time">9:10 AM</span>
-                                                </div>
-                                            </a>
-                                            <!-- Message -->
-                                            <a href="#">
-                                                <div class="btn btn-info btn-circle m-r-10"><i class="ti-settings"></i></div>
-                                                <div class="mail-contnet">
-                                                    <h5>This is title</h5> <span class="mail-desc">You can customize this template as you want</span> <span class="time">9:08 AM</span>
-                                                </div>
-                                            </a>
-                                            <!-- Message -->
-                                            <a href="#">
-                                                <div class="btn btn-primary btn-circle m-r-10"><i class="ti-user"></i></div>
-                                                <div class="mail-contnet">
-                                                    <h5>This is another title</h5> <span class="mail-desc">Just see the my admin!</span> <span class="time">9:02 AM</span>
-                                                </div>
-                                            </a>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <a class="nav-link text-center" href="javascript:void(0);"> <strong>Check all notifications</strong> <i class="fa fa-angle-right"></i> </a>
-                                    </li>
-                                </ul>
+                                <%@include file="absolutemessage.jsp" %>
                             </div>
                         </li>
                         <!-- End Comment -->
@@ -110,7 +71,7 @@
                             <a class="nav-link dropdown-toggle text-muted  " href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="#" alt="user" class="profile-pic" /></a>
                             <div class="dropdown-menu dropdown-menu-right animated zoomIn">
                                 <ul class="dropdown-user">
-                                    <li><a href="#"><i class="fa fa-power-off"></i> Logout</a></li>
+                                    <li><a href="LogOut"><i class="fa fa-power-off"></i> Logout</a></li>
                                 </ul>
                             </div>
                         </li>
@@ -135,30 +96,82 @@
                             <div class="panel-body">
                                 <form>
                                     <div class="form-group">
-                                        <label>Username</label>
-                                        <input type="text" class="form-control" placeholder="Username" name="username">
+                                        <label>Service Name</label>
+                                        <input type="text" class="form-control" placeholder="Username" name="serviceName">
                                     </div>
                                     <div class="form-group">
-                                        <label>Password</label>
-                                        <input type="text" class="form-control" placeholder="Password" name="password">
+                                        <label>SPID</label>
+                                        <input type="text" class="form-control" placeholder="SPID" name="spid">
                                     </div>
-                                    <div class="from-group">
-                                        <label>Service name</label>
-                                        <select class="form-control" name="serviceSelecter">
-                                            <option>yazd1</option>
-                                            <option>yazd2</option>
-                                            <option>yazd3</option>
-                                            <option>yazd4</option>
-                                        </select>
+                                    <div class="form-group">
+                                        <label>Service ID</label>
+                                        <input type="text" class="form-control" placeholder="Service ID" name="serviceId">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Price (Rial)</label>
+                                        <input type="number" class="form-control" placeholder="Price" name="price">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Correlator ID</label>
+                                        <input type="text" class="form-control" placeholder="Correlator ID" name="correlatorId">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Phone Number</label>
+                                        <input type="tel" class="form-control" placeholder="Phone Number" name="phoneNumber">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Welcome MT</label>
+                                        <textarea class="textarea_editor form-control" rows="8" placeholder="Enter text ..." style="height:450px" name="welcomeMT"></textarea>
                                     </div>
                                     <br/>
-                                    <button type="submit" class="btn btn-success">Create Account</button>
+                                    <button type="submit" class="btn btn-success">Create Service</button>
                                 </form>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-6">
-                        
+                        <div class="card">
+                            <div class="card-title">
+                                <h4>Service List </h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Name</th>
+                                                <th>Status</th>
+                                                <th>Date</th>
+                                                <th>Price</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th scope="row">1</th>
+                                                <td>Kolor Tea Shirt For Man</td>
+                                                <td><span class="badge badge-primary">Sale</span></td>
+                                                <td>January 22</td>
+                                                <td class="color-primary">$21.56</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">2</th>
+                                                <td>Kolor Tea Shirt For Women</td>
+                                                <td><span class="badge badge-success">Tax</span></td>
+                                                <td>January 30</td>
+                                                <td class="color-success">$55.32</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">3</th>
+                                                <td>Blue Backpack For Baby</td>
+                                                <td><span class="badge badge-danger">Extended</span></td>
+                                                <td>January 25</td>
+                                                <td class="color-danger">$14.85</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
                     </div>
                 </div>
             </div>

@@ -6,6 +6,12 @@
 
 <%@page import="com.fidar.database.ConstantParameters"%>
 <%@page import="com.fidar.security.SecurityOrder"%>
+<%
+    SecurityOrder securityOrder = new SecurityOrder();
+    String username = (String)session.getAttribute("username");
+    String password = (String)session.getAttribute("password");
+    ConstantParameters answer = securityOrder.whoIsUser(username, password);
+%>
 <div class="left-sidebar">
     <!-- Sidebar scroll-->
     <div class="scroll-sidebar">
@@ -19,6 +25,9 @@
                         <li><a href="UserLogin">Report </a></li>
                     </ul>
                 </li>
+                <%
+                    if(!answer.equals(ConstantParameters.USER_SIMPLE)) {
+                %>
                 <li class="nav-label">Users</li>
                 <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-suitcase"></i><span class="hide-menu">Account</span></a>
                     <ul aria-expanded="false" class="collapse">
@@ -27,15 +36,14 @@
                     </ul>
                 </li>
                 <%
-                    SecurityOrder securityOrder = new SecurityOrder();
-                    String username = (String)session.getAttribute("username");
-                    String password = (String)session.getAttribute("password");
-                    ConstantParameters answer = securityOrder.whoIsUser(username, password);
+                    }
+                %>
+                <%
                     if(answer.equals(ConstantParameters.USER_ADMIN)) {
                 %>
                 <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-envelope"></i><span class="hide-menu">Concept</span></a>
                     <ul aria-expanded="false" class="collapse">
-                        <li><a href="#">Confirm</a></li>
+                        <li><a href="ContentConfirm">Confirm</a></li>
                     </ul>
                 </li>
                 <%
@@ -52,17 +60,23 @@
                 %>
                 <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-suitcase"></i><span class="hide-menu">Concept</span></a>
                     <ul aria-expanded="false" class="collapse">
-                        <li><a href="#">Upload</a></li>
+                        <li><a href="UploadContent">Upload</a></li>
                     </ul>
                 </li>
                 <%
                     }
+                %>
+                <%
+                    if(answer.equals(ConstantParameters.USER_MASTER)){
                 %>
                 <li> <a class="has-arrow" href="#" aria-expanded="false"><i class="fa fa-suitcase"></i><span class="hide-menu">New</span></a>
                     <ul aria-expanded="false" class="collapse">
                         <li><a href="AddService">Add Service</a></li>
                     </ul>
                 </li>
+                <%
+                    }
+                %>
             </ul>
         </nav>
         <!-- End Sidebar navigation -->

@@ -29,7 +29,7 @@ public class DBHandler {
     
     public ConstantParameters returnPeriorityUser(String username, String password){
         // return periority of user for username and password
-        return ConstantParameters.USER_MASTER;
+        return ConstantParameters.USER_ADMIN;
     }
     
 }
