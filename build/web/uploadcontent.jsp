@@ -104,15 +104,6 @@
                                             <option>Asmin4</option>
                                         </select>
                                     </div>
-                                    <div class="from-group">
-                                        <label>Content Category</label>
-                                        <select class="form-control" name="serviceSelecter">
-                                            <option>yazd1</option>
-                                            <option>yazd2</option>
-                                            <option>yazd3</option>
-                                            <option>yazd4</option>
-                                        </select>
-                                    </div>
                                     <br/>
                                     <div class="fallback">
                                         <input name="file" type="file" class="btn btn-success"/>

@@ -4,6 +4,7 @@
     Author     : alirzea
 --%>
 
+<%@page import="com.fidar.report.chart.ChartDataset"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -116,7 +117,7 @@
                     <div class="col-md-6">
                         <div class="card">
                             <div class="card-title">
-                                <h4>Table of current services </h4>
+                                <h4>Top service in subscription users</h4>
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
@@ -125,9 +126,8 @@
                                             <tr>
                                                 <th>#</th>
                                                 <th>Name</th>
-                                                <th>Owner</th>
                                                 <th>Admin</th>
-                                                <th>Revenue</th>
+                                                <th>Sub. NO.</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -136,21 +136,18 @@
                                                 <td>Golnakhorim</td>
                                                 <td><span class="badge badge-primary">Morteza</span></td>
                                                 <td>Vasfa</td>
-                                                <td class="color-primary">6,000,000 T</td>
                                             </tr>
                                             <tr>
                                                 <th scope="row">2</th>
                                                 <td>Golnakhorim</td>
                                                 <td><span class="badge badge-primary">Morteza</span></td>
                                                 <td>Vasfa</td>
-                                                <td class="color-primary">6,000,000 T</td>
                                             </tr>
                                             <tr>
                                                 <th scope="row">3</th>
                                                 <td>Golnakhorim</td>
                                                 <td><span class="badge badge-inverse">Morteza</span></td>
                                                 <td>Vasfa</td>
-                                                <td class="color-primary">6,000,000 T</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -247,29 +244,21 @@
 	ctx.height = 300;
 	var myChart = new Chart( ctx, {
 		type: 'pie',
-		data: {
-			datasets: [ {
-				data: [ 45, 25, 20, 10 ],
-				backgroundColor: [
-                                    "rgba(0, 123, 255,0.9)",
-                                    "rgba(0, 123, 255,0.7)",
-                                    "rgba(0, 123, 255,0.5)",
-                                    "rgba(0,0,0,0.07)"
-                                ],
-				hoverBackgroundColor: [
-                                    "rgba(0, 123, 255,0.9)",
-                                    "rgba(0, 123, 255,0.7)",
-                                    "rgba(0, 123, 255,0.5)",
-                                    "rgba(0,0,0,0.07)"
-                                ]
-
-                            } ],
-			labels: [
-                            "green",
-                            "green",
-                            "green"
-                        ]
-		},
+		<%
+                    ChartDataset chartDataset = new ChartDataset();
+                    if(answer.equals(ConstantParameters.USER_ADMIN) || answer.equals(ConstantParameters.USER_MASTER)){
+                        
+                        out.print(
+                                chartDataset.getDatasetPieChart_Admin()
+                        );
+                    }
+                    
+                    if(answer.equals(ConstantParameters.USER_SIMPLE)){
+                        out.print(
+                                chartDataset.getDatasetPieChart_User()
+                        );
+                    }
+                %>,
 		options: {
 			responsive: true
 		}
@@ -282,25 +271,19 @@
 	//    ctx.height = 200;
 	var myChart = new Chart( ctx, {
             type: 'bar',
-            data: {
-                labels: [ "January", "February", "Alireza", "April", "May", "June", "July" ],
-                datasets: [
-                    {
-                        label: "My First dataset",
-                        data: [ 65, 59, 80, 81, 56, 55, 40 ],
-                        borderColor: "rgba(0, 123, 255, 0.9)",
-                        borderWidth: "0",
-                        backgroundColor: "rgba(0, 123, 255, 0.5)"
-                    },
-                    {
-                        label: "My Second dataset",
-                        data: [ 28, 48, 40, 19, 86, 27, 90 ],
-                        borderColor: "rgba(0,0,0,0.09)",
-                        borderWidth: "0",
-                        backgroundColor: "rgba(0,0,0,0.07)"
-                    }
-                ]
-            },
+            <%
+                if(answer.equals(ConstantParameters.USER_ADMIN) || answer.equals(ConstantParameters.USER_MASTER)){
+                    out.print(
+                            chartDataset.getDatasetBarChart_Admin()
+                    );
+                }
+                
+                if(answer.equals(ConstantParameters.USER_SIMPLE)){
+                    out.print(
+                            chartDataset.getDatasetBarChart_User()
+                    );
+                }
+            %>,
             options: {
                 scales: {
                     yAxes: [ {

@@ -41,7 +41,7 @@
                 <%
                     if(answer.equals(ConstantParameters.USER_ADMIN)) {
                 %>
-                <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-envelope"></i><span class="hide-menu">Concept</span></a>
+                <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-envelope"></i><span class="hide-menu">Content</span></a>
                     <ul aria-expanded="false" class="collapse">
                         <li><a href="ContentConfirm">Confirm</a></li>
                     </ul>
@@ -58,7 +58,7 @@
                 <%
                     if(answer.equals(ConstantParameters.USER_ADMIN) || answer.equals(ConstantParameters.USER_SIMPLE)) {
                 %>
-                <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-suitcase"></i><span class="hide-menu">Concept</span></a>
+                <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-suitcase"></i><span class="hide-menu">Content</span></a>
                     <ul aria-expanded="false" class="collapse">
                         <li><a href="UploadContent">Upload</a></li>
                     </ul>

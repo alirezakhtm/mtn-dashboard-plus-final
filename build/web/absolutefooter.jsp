@@ -4,4 +4,4 @@
     Author     : alirzea
 --%>
 
-<footer class="footer"> © 2018 All rights reserved. Designed by <a href="https://colorlib.com">Fidar Co.</a></footer>
+<footer class="footer"> © 2018 All rights reserved. Designed by <a href="#">Vasfa Co.</a></footer>
