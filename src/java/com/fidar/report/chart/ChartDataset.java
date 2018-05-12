@@ -19,6 +19,7 @@ public class ChartDataset {
     DBHandler db = new DBHandler();
     
     public String getDatasetPieChart_Admin(){
+        /*
         db.open();
         List<Integer> allServiceCode = db.getAllServiceCode();
         db.close();
@@ -79,6 +80,8 @@ public class ChartDataset {
 "		}";
         
         return answer;
+        */
+        return "";
     }
 
     public String getDatasetPieChart_User(){
@@ -86,6 +89,7 @@ public class ChartDataset {
     }
     
     public String getDatasetBarChart_Admin(){
+        /*
         db.open();
         List<Integer> allServiceCode = db.getAllServiceCode();
         db.close();
@@ -133,9 +137,35 @@ public class ChartDataset {
         
         
         return answer;
+        */
+        return "";
     }
     
     public String getDatasetBarChart_User(){
         return null;
+    }
+    
+    public String getDatasetBarChart_RevinueReport(){
+        //?????????????
+        /*
+        labels: [ "3000", "2500", "2000", "1500", "1000", "500" ],
+        datasets: [
+            {
+                label: "Success",
+                data: [ 65, 59, 80, 81, 56, 55, 40 ],
+                borderColor: "rgba(0, 123, 255, 0.9)",
+                borderWidth: "0",
+                backgroundColor: "rgba(0, 123, 255, 0.5)"
+            },
+            {
+                label: "Fail",
+                data: [ 28, 48, 40, 19, 86, 27, 90 ],
+                borderColor: "rgba(0,0,0,0.09)",
+                borderWidth: "0",
+                backgroundColor: "rgba(200,50,0,0.5)"
+            }
+        ]
+        */
+        return "";
     }
 }

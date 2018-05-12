@@ -4,6 +4,7 @@
     Author     : alirzea
 --%>
 
+<%@page import="com.fidar.report.table.TableDataset"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -99,34 +100,18 @@
                                         <thead>
                                             <tr>
                                                 <th>#</th>
-                                                <th>Name</th>
-                                                <th>Status</th>
-                                                <th>Date</th>
-                                                <th>Price</th>
+                                                <th>Username</th>
+                                                <th>Service</th>
+                                                <th>File</th>
+                                                <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <th scope="row">1</th>
-                                                <td>Kolor Tea Shirt For Man</td>
-                                                <td><span class="badge badge-primary">Sale</span></td>
-                                                <td>January 22</td>
-                                                <td class="color-primary">$21.56</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">2</th>
-                                                <td>Kolor Tea Shirt For Women</td>
-                                                <td><span class="badge badge-success">Tax</span></td>
-                                                <td>January 30</td>
-                                                <td class="color-success">$55.32</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">3</th>
-                                                <td>Blue Backpack For Baby</td>
-                                                <td><span class="badge badge-danger">Extended</span></td>
-                                                <td>January 25</td>
-                                                <td class="color-danger">$14.85</td>
-                                            </tr>
+                                            <%
+                                                TableDataset td = new TableDataset();
+                                                String table_contentConfirm = td.getTableConfirmFile(username);
+                                                out.println(table_contentConfirm);
+                                            %>
                                         </tbody>
                                     </table>
                                 </div>

@@ -4,6 +4,9 @@
     Author     : alirzea
 --%>
 
+<%@page import="com.fidar.report.chart.ChartDataset"%>
+<%@page import="com.fidar.report.table.TableDataset"%>
+<%@page import="com.fidar.formal.input.MakeInput"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -98,11 +101,83 @@
                                     <div class="from-group">
                                         <label>Service name</label>
                                         <select class="form-control" name="serviceSelecter">
-                                            <option>yazd1</option>
-                                            <option>yazd2</option>
-                                            <option>yazd3</option>
-                                            <option>yazd4</option>
+                                            <%
+                                                MakeInput makeInput = new MakeInput();
+                                                String selector_dailyReport_serviceName = makeInput.getSelector_AddSimpleUser(username);
+                                                out.println(selector_dailyReport_serviceName);
+                                            %>
                                         </select>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4 col-sm-4">
+                                            <div class="from-group">
+                                                <label>Year</label>
+                                                <select class="form-control" name="year">
+                                                    <option>2017</option>
+                                                    <option>2018</option>
+                                                    <option>2019</option>
+                                                    <option>2020</option>
+                                                    <option>2021</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-4">
+                                            <div class="from-group">
+                                                <label>Month</label>
+                                                <select class="form-control" name="month">
+                                                    <option>01</option>
+                                                    <option>02</option>
+                                                    <option>03</option>
+                                                    <option>04</option>
+                                                    <option>05</option>
+                                                    <option>06</option>
+                                                    <option>07</option>
+                                                    <option>08</option>
+                                                    <option>09</option>
+                                                    <option>10</option>
+                                                    <option>11</option>
+                                                    <option>12</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-4">
+                                            <div class="from-group">
+                                                <label>Day</label>
+                                                <select class="form-control" name="day">
+                                                    <option>01</option>
+                                                    <option>02</option>
+                                                    <option>03</option>
+                                                    <option>04</option>
+                                                    <option>05</option>
+                                                    <option>06</option>
+                                                    <option>07</option>
+                                                    <option>08</option>
+                                                    <option>09</option>
+                                                    <option>10</option>
+                                                    <option>11</option>
+                                                    <option>12</option>
+                                                    <option>13</option>
+                                                    <option>14</option>
+                                                    <option>15</option>
+                                                    <option>16</option>
+                                                    <option>17</option>
+                                                    <option>18</option>
+                                                    <option>19</option>
+                                                    <option>20</option>
+                                                    <option>21</option>
+                                                    <option>22</option>
+                                                    <option>23</option>
+                                                    <option>24</option>
+                                                    <option>25</option>
+                                                    <option>26</option>
+                                                    <option>27</option>
+                                                    <option>28</option>
+                                                    <option>29</option>
+                                                    <option>30</option>
+                                                    <option>31</option>
+                                                </select>
+                                            </div>
+                                        </div>
                                     </div>
                                     <br/>
                                     <button type="submit" class="btn btn-success">Generate Report</button>
@@ -113,7 +188,7 @@
                 </div>
                 <!-- second row -->
                 <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-md-6">
                         <div class="card">
                             <div class="card-title">
                                 <h4>Table Basic </h4>
@@ -125,57 +200,45 @@
                                         <thead>
                                             <tr>
                                                 <th>#</th>
-                                                <th>Name</th>
-                                                <th>Status</th>
-                                                <th>Date</th>
                                                 <th>Price</th>
+                                                <th>Success</th>
+                                                <th>Fail</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <th scope="row">1</th>
-                                                <td>Kolor Tea Shirt For Man</td>
-                                                <td><span class="badge badge-primary">Sale</span></td>
-                                                <td>January 22</td>
-                                                <td class="color-primary">$21.56</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">2</th>
-                                                <td>Kolor Tea Shirt For Women</td>
-                                                <td><span class="badge badge-success">Tax</span></td>
-                                                <td>January 30</td>
-                                                <td class="color-success">$55.32</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">3</th>
-                                                <td>Blue Backpack For Baby</td>
-                                                <td><span class="badge badge-danger">Extended</span></td>
-                                                <td>January 25</td>
-                                                <td class="color-danger">$14.85</td>
-                                            </tr>
+                                            <%
+                                                TableDataset tableDataset = new TableDataset();
+                                                String date = request.getParameter("year") + "-" + request.getParameter("month") + "-" + request.getParameter("day");
+                                                String serviceName = request.getParameter("serviceSelecter");
+                                                String table_details = "";
+                                                if(serviceName != ""){
+                                                    table_details = tableDataset.getReportDetails(date, serviceName);
+                                                }
+                                                out.println(table_details);
+                                            %>
                                         </tbody>
                                     </table>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <!-- third row -->
-                <div class="row">
                     <div class="col-md-6">
                         <div class="card">
                             <div class="card-title">
                                 <h4>Details</h4>
                             </div>
                             <div class="panel-body">
-                                <p><b>Revenue:</b> 180,000</p>
-                                <p><b>Total Sub. User:</b> 180,000</p>
-                                <p><b>Total Active User:</b> 180,000</p>
-                                <p><b>New Sub. User:</b> 180,000</p>
-                                <p><b>New UnSub. User:</b> 180,000</p>
+                                <%
+                                    String details = "";
+                                    details = tableDataset.getReportDetails(date, serviceName);
+                                    out.println(details);
+                                %>
                             </div>
                         </div>
                     </div>
+                </div>
+                <!-- third row -->
+                <div class="row">
                     <div class="col-md-6">
                         <div class="card">
                             <div class="card-title">
@@ -254,23 +317,11 @@
 	var myChart = new Chart( ctx, {
             type: 'bar',
             data: {
-                labels: [ "January", "February", "Alireza", "April", "May", "June", "July" ],
-                datasets: [
-                    {
-                        label: "My First dataset",
-                        data: [ 65, 59, 80, 81, 56, 55, 40 ],
-                        borderColor: "rgba(0, 123, 255, 0.9)",
-                        borderWidth: "0",
-                        backgroundColor: "rgba(0, 123, 255, 0.5)"
-                    },
-                    {
-                        label: "My Second dataset",
-                        data: [ 28, 48, 40, 19, 86, 27, 90 ],
-                        borderColor: "rgba(0,0,0,0.09)",
-                        borderWidth: "0",
-                        backgroundColor: "rgba(0,0,0,0.07)"
-                    }
-                ]
+                <%
+                    ChartDataset chartDataset = new ChartDataset();
+                    String data = chartDataset.getDatasetBarChart_RevinueReport();
+                    out.println(data);
+                %>
             },
             options: {
                 scales: {

@@ -4,6 +4,7 @@
     Author     : alirzea
 --%>
 
+<%@page import="com.fidar.report.table.TableDataset"%>
 <%@page import="com.fidar.report.chart.ChartDataset"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -114,7 +115,7 @@
                 <!-- Finish chart -->
                 <!-- Table of services -->
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                         <div class="card">
                             <div class="card-title">
                                 <h4>Top service in subscription users</h4>
@@ -131,31 +132,21 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <th scope="row">1</th>
-                                                <td>Golnakhorim</td>
-                                                <td><span class="badge badge-primary">Morteza</span></td>
-                                                <td>Vasfa</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">2</th>
-                                                <td>Golnakhorim</td>
-                                                <td><span class="badge badge-primary">Morteza</span></td>
-                                                <td>Vasfa</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">3</th>
-                                                <td>Golnakhorim</td>
-                                                <td><span class="badge badge-inverse">Morteza</span></td>
-                                                <td>Vasfa</td>
-                                            </tr>
+                                            <%
+                                                TableDataset tds = new TableDataset();
+                                                if(answer.equals(ConstantParameters.USER_ADMIN) || answer.equals(ConstantParameters.USER_MASTER)){
+                                                    out.print(
+                                                            tds.getTableTopServices_Subscribtion()
+                                                    );
+                                                }
+                                            %>
                                         </tbody>
                                     </table>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6">
+<!--                    <div class="col-md-6">
                         <div class="card">
                             <div class="card-title">
                                 <h4>Table of current services </h4>
@@ -199,7 +190,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div>-->
                 </div>
                 <!-- Finish table of services -->
                 <!-- End PAge Content -->

@@ -6,6 +6,7 @@
 package com.fidar.user;
 
 import com.fidar.database.ConstantParameters;
+import com.fidar.database.DBHandler;
 import com.fidar.security.SecurityOrder;
 import java.io.IOException;
 import javax.servlet.RequestDispatcher;
@@ -24,7 +25,7 @@ import javax.servlet.http.HttpSession;
 public class AddUser extends HttpServlet {
 
     private SecurityOrder securityOrder = new SecurityOrder();
-    
+    private DBHandler db = new DBHandler();
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -47,6 +48,19 @@ public class AddUser extends HttpServlet {
             securityOrder.logOutUser(request);
             RequestDispatcher dispatcher = request.getRequestDispatcher("loginpage.jsp");
             dispatcher.forward(request, response);
+        }
+        
+        // add account for all type user
+        String action = request.getParameter("action");
+        switch(action){
+            case "add-simple-user":
+                String username_newUser = request.getParameter("username");
+                String password_newUser = request.getParameter("password");
+                String serviceName = request.getParameter("service");
+                db.open();
+                db.addSimpleUser(username_newUser, password_newUser, serviceName, username);
+                db.close();
+                break;
         }
     }
 

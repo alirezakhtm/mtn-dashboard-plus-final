@@ -4,10 +4,10 @@
     Author     : alirzea
 --%>
 
+<%@page import="com.fidar.formal.input.MakeInput"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -82,6 +82,16 @@
         <!-- End header header -->
         <!-- Left Sidebar  -->
         <%@include file="absoluteleftsidebar.jsp" %>
+        <%
+            if(
+                    answer.equals(ConstantParameters.USER_SIMPLE) ||
+                    answer.equals(ConstantParameters.USER_UNKNOWN)
+                    ){
+                securityOrder.logOutUser(request);
+                RequestDispatcher dispatcher = request.getRequestDispatcher("loginpage.jsp");
+                dispatcher.forward(request, response);
+            }
+        %>
         <!-- End Left Sidebar  -->
         <!-- Page wrapper  -->
         <div class="page-wrapper" style="height:1200px;">
@@ -94,31 +104,36 @@
                                 <h4>Add Simple User</h4>
                             </div>
                             <div class="panel-body">
-                                <form>
+                                <form method="post">
                                     <div class="form-group">
                                         <label>Username</label>
-                                        <input type="text" class="form-control" placeholder="Username" name="username">
+                                        <input type="text" class="form-control" placeholder="Enter Username" name="username">
                                     </div>
                                     <div class="form-group">
                                         <label>Password</label>
-                                        <input type="text" class="form-control" placeholder="Password" name="password">
+                                        <input type="text" class="form-control" placeholder="Enter Password" name="password">
                                     </div>
                                     <div class="from-group">
                                         <label>Service name</label>
-                                        <select class="form-control" name="serviceSelecter">
-                                            <option>yazd1</option>
-                                            <option>yazd2</option>
-                                            <option>yazd3</option>
-                                            <option>yazd4</option>
+                                        <select class="form-control" name="service">
+                                            <%
+                                                MakeInput makeInput = new MakeInput();
+                                                String selector_simpleUser = makeInput.getSelector_AddSimpleUser(username);
+                                                out.print(selector_simpleUser);
+                                            %>
                                         </select>
                                     </div>
                                     <br/>
-                                    <button type="submit" class="btn btn-success">Create Account</button>
+                                    <input type="hidden" value="add-simple-user" name="action">
+                                    <button type="submit" class="btn btn-success" name="btn-addSimpleUser">Create Account</button>
                                 </form>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-6">
+                        <%
+                            if(answer.equals(ConstantParameters.USER_MASTER)){
+                        %>
                         <div class="card">
                             <div class="card-title">
                                 <h4>Add Admin User</h4>
@@ -147,11 +162,17 @@
                                 </form>
                             </div>
                         </div>
+                        <%
+                            }
+                        %>
                     </div>
                 </div>
                 <!-- second row -->
                 <div class="row">
                     <div class="col-md-6">
+                        <%
+                            if(answer.equals(ConstantParameters.USER_MASTER)){
+                        %>
                         <div class="card">
                             <div class="card-title">
                                 <h4>Add Master User</h4>
@@ -170,9 +191,15 @@
                                     <button type="submit" class="btn btn-success">Create Account</button>
                                 </form>
                             </div>
-                        </div>
+                        </div
+                        <%
+                            }
+                        %>
                     </div>
                     <div class="col-md-6">
+                        <%
+                            if(answer.equals(ConstantParameters.USER_MASTER)){
+                        %>
                         <div class="card">
                             <div class="card-title">
                                 <h4>Update Admin User</h4>
@@ -204,6 +231,9 @@
                                 </form>
                             </div>
                         </div>
+                        <%
+                            }
+                        %>
                     </div>
                 </div>
             </div>

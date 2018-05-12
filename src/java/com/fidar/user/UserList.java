@@ -6,6 +6,7 @@
 package com.fidar.user;
 
 import com.fidar.database.ConstantParameters;
+import com.fidar.database.DBHandler;
 import com.fidar.security.SecurityOrder;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -25,6 +26,7 @@ import javax.servlet.http.HttpSession;
 public class UserList extends HttpServlet {
 
     private SecurityOrder securityOrder = new SecurityOrder();
+    private DBHandler db = new DBHandler();
     
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -48,6 +50,22 @@ public class UserList extends HttpServlet {
             securityOrder.logOutUser(request);
             RequestDispatcher dispatcher = request.getRequestDispatcher("loginpage.jsp");
             dispatcher.forward(request, response);
+        }
+        
+        String action = request.getParameter("action");
+        String admin_username = request.getParameter("admin_username");
+        String user_username = request.getParameter("username");
+        switch(action){
+            case "disable":
+                db.open();
+                db.disableUser(admin_username ,user_username);
+                db.close();
+                break;
+            case "active":
+                db.open();
+                db.activeUser(admin_username, user_username);
+                db.close();
+                break;
         }
     }
 
