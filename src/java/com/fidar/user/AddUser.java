@@ -40,28 +40,36 @@ public class AddUser extends HttpServlet {
         HttpSession session = request.getSession();
         String username = (String)session.getAttribute("username");
         String password = (String)session.getAttribute("password");
+        session.setAttribute("add_simple_user", -1);
         ConstantParameters answer = securityOrder.whoIsUser(username, password);
         if(!answer.equals(ConstantParameters.USER_UNKNOWN) && !answer.equals(ConstantParameters.USER_SIMPLE)){
+            // add account for all type user
+            try{
+                String action = request.getParameter("action");
+                switch(action){
+                    case "add-simple-user":
+                        String username_newUser = request.getParameter("username");
+                        String password_newUser = request.getParameter("password");
+                        String serviceName = request.getParameter("service");
+                        db.open();
+                        boolean resultAddingUser = db.addSimpleUser(username_newUser, password_newUser, serviceName, username);
+                        db.close();
+                        session.setAttribute("add_simple_user", (resultAddingUser) ? 1 : 0);
+                        break;
+                }
+            }catch(Exception e){
+                
+            }
             RequestDispatcher dispatcher = request.getRequestDispatcher("adduser.jsp");
             dispatcher.forward(request, response);
+            
         }else{
             securityOrder.logOutUser(request);
             RequestDispatcher dispatcher = request.getRequestDispatcher("loginpage.jsp");
             dispatcher.forward(request, response);
         }
         
-        // add account for all type user
-        String action = request.getParameter("action");
-        switch(action){
-            case "add-simple-user":
-                String username_newUser = request.getParameter("username");
-                String password_newUser = request.getParameter("password");
-                String serviceName = request.getParameter("service");
-                db.open();
-                db.addSimpleUser(username_newUser, password_newUser, serviceName, username);
-                db.close();
-                break;
-        }
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

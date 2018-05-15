@@ -11,6 +11,11 @@
     String username = (String)session.getAttribute("username");
     String password = (String)session.getAttribute("password");
     ConstantParameters answer = securityOrder.whoIsUser(username, password);
+    if(answer.equals(ConstantParameters.USER_UNKNOWN)){
+        //securityOrder.logOutUser(request);
+        RequestDispatcher getOutThisUser = request.getRequestDispatcher("loginpage.jsp");
+        getOutThisUser.forward(request, response);
+    }
 %>
 <div class="left-sidebar">
     <!-- Sidebar scroll-->

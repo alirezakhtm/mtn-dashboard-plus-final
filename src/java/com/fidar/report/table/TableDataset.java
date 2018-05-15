@@ -45,7 +45,7 @@ public class TableDataset {
                 cal.add(Calendar.DAY_OF_MONTH, -1);
                 String strDate = new SimpleDateFormat("yyyy-MM-dd").format(cal.getTime());
                 db.open();
-                int subNumber = db.getSubNumber(strDate);
+                int subNumber = db.getSubNumber(m, strDate);
                 db.close();
                 lstSubUser.add(subNumber);
             }

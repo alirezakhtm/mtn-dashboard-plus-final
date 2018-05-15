@@ -14,8 +14,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import javax.websocket.Session;
 
 /**
  *
@@ -41,6 +39,8 @@ public class UserLogin extends HttpServlet {
         
         
         securityOrder.pushUserInSession(request);
+        
+        try{Thread.sleep(2000);}catch(Exception e){}
         
         // proccess for identification and redirect to correct page
         

@@ -97,6 +97,42 @@
         <div class="page-wrapper" style="height:1200px;">
             <!-- Container fluid  -->
             <div class="container-fluid">
+                
+                <br/>
+                
+                <%
+                    int add_simple_user = (int)session.getAttribute("add_simple_user");
+                    switch(add_simple_user){
+                        case 1:
+                %>
+                
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="alert alert-primary alert-dismissible fade show">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+                            User added successfully.
+                        </div>
+                    </div>
+                </div>
+                
+                <%
+                    break;
+                    case 0:
+                %>
+                
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="alert alert-warning alert-dismissible fade show">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+                            <strong>Failed!</strong> Username is exist or you dont have enough permission to create this account.
+                        </div>
+                    </div>
+                </div>
+                
+                <%
+                    break;
+                    }
+                %>
                 <div class="row">
                     <div class="col-md-6">
                         <div class="card">
@@ -191,7 +227,7 @@
                                     <button type="submit" class="btn btn-success">Create Account</button>
                                 </form>
                             </div>
-                        </div
+                        </div>
                         <%
                             }
                         %>
@@ -245,6 +281,8 @@
         <!-- End Page wrapper  -->
     </div>
     <!-- End Wrapper -->
+
+
     <!-- All Jquery -->
     <script src="js/lib/jquery/jquery.min.js"></script>
     <!-- Bootstrap tether Core JavaScript -->
@@ -258,90 +296,7 @@
     <script src="js/lib/sticky-kit-master/dist/sticky-kit.min.js"></script>
     <!--Custom JavaScript -->
     <script src="js/custom.min.js"></script>
-    <!-- Pie chart - java script file-->
-    <!--<script src="js/lib/flot-chart/jquery.flot.pie.js"></script>-->
-    <!--  flot-chart js -->
-<!--    <script src="js/lib/flot-chart/excanvas.min.js"></script>
-    <script src="js/lib/flot-chart/jquery.flot.js"></script>
-    <script src="js/lib/flot-chart/jquery.flot.pie.js"></script>
-    <script src="js/lib/flot-chart/jquery.flot.time.js"></script>
-    <script src="js/lib/flot-chart/jquery.flot.stack.js"></script>
-    <script src="js/lib/flot-chart/jquery.flot.resize.js"></script>
-    <script src="js/lib/flot-chart/jquery.flot.crosshair.js"></script>
-    <script src="js/lib/flot-chart/curvedLines.js"></script>
-    <script src="js/lib/flot-chart/flot-tooltip/jquery.flot.tooltip.min.js"></script>-->
-    <script src="js/lib/chart-js/Chart.bundle.js"></script>
-    <script>
-        //pie chart
-	var ctx = document.getElementById( "pieChart" );
-	ctx.height = 300;
-	var myChart = new Chart( ctx, {
-		type: 'pie',
-		data: {
-			datasets: [ {
-				data: [ 45, 25, 20, 10 ],
-				backgroundColor: [
-                                    "rgba(0, 123, 255,0.9)",
-                                    "rgba(0, 123, 255,0.7)",
-                                    "rgba(0, 123, 255,0.5)",
-                                    "rgba(0,0,0,0.07)"
-                                ],
-				hoverBackgroundColor: [
-                                    "rgba(0, 123, 255,0.9)",
-                                    "rgba(0, 123, 255,0.7)",
-                                    "rgba(0, 123, 255,0.5)",
-                                    "rgba(0,0,0,0.07)"
-                                ]
-
-                            } ],
-			labels: [
-                            "green",
-                            "green",
-                            "green"
-                        ]
-		},
-		options: {
-			responsive: true
-		}
-	} );
-    </script>
     
-    <script>
-        //bar chart
-	var ctx = document.getElementById( "barChart" );
-	//    ctx.height = 200;
-	var myChart = new Chart( ctx, {
-            type: 'bar',
-            data: {
-                labels: [ "January", "February", "Alireza", "April", "May", "June", "July" ],
-                datasets: [
-                    {
-                        label: "My First dataset",
-                        data: [ 65, 59, 80, 81, 56, 55, 40 ],
-                        borderColor: "rgba(0, 123, 255, 0.9)",
-                        borderWidth: "0",
-                        backgroundColor: "rgba(0, 123, 255, 0.5)"
-                    },
-                    {
-                        label: "My Second dataset",
-                        data: [ 28, 48, 40, 19, 86, 27, 90 ],
-                        borderColor: "rgba(0,0,0,0.09)",
-                        borderWidth: "0",
-                        backgroundColor: "rgba(0,0,0,0.07)"
-                    }
-                ]
-            },
-            options: {
-                scales: {
-                    yAxes: [ {
-                        ticks: {
-                            beginAtZero: true
-                        }
-                    } ]
-                }
-            }
-	} );
-    </script>
 </body>
 
 </html>

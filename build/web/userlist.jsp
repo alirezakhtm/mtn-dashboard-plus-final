@@ -4,6 +4,7 @@
     Author     : alirzea
 --%>
 
+<%@page import="com.fidar.report.table.TableDataset"%>
 <%@page import="com.fidar.formal.input.MakeInput"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -116,8 +117,8 @@
                                         </tfoot>
                                         <tbody>
                                             <%
-                                                MakeInput makeInput = new MakeInput();
-                                                String userList = makeInput.getSelector_AddSimpleUser(username);
+                                                TableDataset tableDataset = new TableDataset();
+                                                String userList = tableDataset.getTableUserList(username);
                                                 out.print(userList);
                                             %>
                                         </tbody>

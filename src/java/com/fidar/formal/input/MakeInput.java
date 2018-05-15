@@ -17,15 +17,15 @@ public class MakeInput {
     
     public String getSelector_AddSimpleUser(String username){
         String answer = "";
-//        db.open();
-//        List<Integer> lstServiceCode = db.getAllServiceCodeForAdmin(username);
-//        db.close();
-//        for(int n : lstServiceCode){
-//            db.open();
-//            String serviceName = db.getServiceName(n);
-//            db.close();
-//            answer += "<option>" + serviceName + "</option>\n";
-//        }
+        db.open();
+        List<Integer> lstServiceCode = db.getAllServiceCodeForAdmin(username);
+        db.close();
+        for(int n : lstServiceCode){
+            db.open();
+            String serviceName = db.getServiceName(n);
+            db.close();
+            answer += "<option>" + serviceName + "</option>\n";
+        }
         return answer;
     }
 }
