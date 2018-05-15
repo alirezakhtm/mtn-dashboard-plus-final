@@ -44,6 +44,25 @@ public class UserList extends HttpServlet {
         String password = (String)session.getAttribute("password");
         ConstantParameters answer = securityOrder.whoIsUser(username, password);
         if(!answer.equals(ConstantParameters.USER_UNKNOWN) && !answer.equals(ConstantParameters.USER_SIMPLE)){
+            try{
+                String action = request.getParameter("action");
+                String admin_username = request.getParameter("admin_username");
+                String user_username = request.getParameter("username");
+                switch(action){
+                    case "disable":
+                        db.open();
+                        db.disableUser(admin_username ,user_username);
+                        db.close();
+                        break;
+                    case "active":
+                        db.open();
+                        db.activeUser(admin_username, user_username);
+                        db.close();
+                        break;
+                }
+            }catch(Exception e){
+                
+            }
             RequestDispatcher dispatcher = request.getRequestDispatcher("userlist.jsp");
             dispatcher.forward(request, response);
         }else{
@@ -52,21 +71,7 @@ public class UserList extends HttpServlet {
             dispatcher.forward(request, response);
         }
         
-        String action = request.getParameter("action");
-        String admin_username = request.getParameter("admin_username");
-        String user_username = request.getParameter("username");
-        switch(action){
-            case "disable":
-                db.open();
-                db.disableUser(admin_username ,user_username);
-                db.close();
-                break;
-            case "active":
-                db.open();
-                db.activeUser(admin_username, user_username);
-                db.close();
-                break;
-        }
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

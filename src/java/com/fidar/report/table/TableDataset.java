@@ -83,7 +83,11 @@ public class TableDataset {
             db.open();
             String status = db.getUserStatus(username);
             db.close();
-            answer += "<th>" + status + "</th>\n";
+            db.open();
+            String serviceName = db.getServiceName_simpleUser(username);
+            db.close();
+            answer += "<th>" + serviceName + "</th>\n";
+            answer += "<th>" + status.toUpperCase() + "</th>\n";
             switch(status){
                 case "active":
                     answer += "<th><a href=\"UserList?admin_username=" + admin_username + "&username=" + username + "&action=disable\" class=\"btn btn-danger\">Disable</a></th>\n</tr>\n";
@@ -108,9 +112,46 @@ public class TableDataset {
                         "<td>" + ccfo.getUsername() + "</td>\n" +
                         "<td>" + ccfo.getServiceName() + "</td>\n" +
                         "<td><a href=\"" + ccfo.getFileAddress() + "\" class=\"color-primary\"><span class=\"icon-flag\"></span> File</a></td>\n" +
+                        "<td>" + ccfo.getDate() + "</td>" +
                         "<td><a href=\"ContentConfirm?action=confirm&fileId=" + ccfo.getFileId() +
                             "\" class=\"btn btn-success\">Confirm</a> <a href=\"ContentConfirm?action=denied&fileId=" +
                             ccfo.getFileId() + "\" class=\"btn btn-danger\">Denied</a></td>\n" +
+                    "</tr>\n";
+            Counter++;
+        }
+        return answer;
+    }
+    
+    
+    public String getTableConfirmFileHistory(String admin_username){
+        String answer = "";
+        db.open();
+        List<ConfirmContentFileObject> lstConfirmContent = db.getConfirmContentListHistory(admin_username);
+        db.close();
+        int Counter = 1;
+        for(ConfirmContentFileObject ccfo : lstConfirmContent){
+            String status = "";
+            switch(ccfo.getStatus()){
+                case 0:
+                    status = "Denied";
+                    break;
+                case 1:
+                    status = "Confirm - Pendding";
+                    break;
+                case 2:
+                    status = "Confirm - Proccessing";
+                    break;
+                case 3:
+                    status = "Confirm - Successfully Loaded";
+            }
+            answer += "<tr>\n" +
+                    "<th scope=\"row\">" + Counter + "</th>\n" +
+                        "<td>" + ccfo.getUsername() + "</td>\n" +
+                        "<td>" + ccfo.getServiceName() + "</td>\n" +
+                        "<td><a href=\"" + ccfo.getFileAddress() + "\" class=\"color-primary\"><span class=\"icon-flag\"></span> File</a></td>\n" +
+                        "<td>" + ccfo.getDate() + "</td>" +
+                        "<td>" + ccfo.getSeenDate() + "</td>" +
+                        "<td>" + status + "</td>\n" +
                     "</tr>\n";
             Counter++;
         }

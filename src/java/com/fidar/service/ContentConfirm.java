@@ -6,6 +6,7 @@
 package com.fidar.service;
 
 import com.fidar.database.ConstantParameters;
+import com.fidar.database.DBHandler;
 import com.fidar.security.SecurityOrder;
 import java.io.IOException;
 import javax.servlet.RequestDispatcher;
@@ -24,6 +25,7 @@ import javax.servlet.http.HttpSession;
 public class ContentConfirm extends HttpServlet {
 
     private SecurityOrder securityOrder = new SecurityOrder();
+    private DBHandler db = new DBHandler();
     
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -46,6 +48,24 @@ public class ContentConfirm extends HttpServlet {
             dispatcher = request.getRequestDispatcher("loginpage.jsp");
             dispatcher.forward(request, response);
         }else{
+            try{
+                int fileId = Integer.parseInt(request.getParameter("fileId"));
+                String action = request.getParameter("action");
+                switch(action.toLowerCase()){
+                    case "confirm":
+                        db.open();
+                        db.setFileConfirm(fileId);
+                        db.close();
+                        break;
+                    case "denied":
+                        db.open();
+                        db.setFileDenied(fileId);
+                        db.close();
+                        break;
+                }
+            }catch(Exception e){
+                
+            }
             dispatcher = request.getRequestDispatcher("contentconfirm.jsp");
             dispatcher.forward(request, response);
         }

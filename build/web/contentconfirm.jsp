@@ -103,6 +103,7 @@
                                                 <th>Username</th>
                                                 <th>Service</th>
                                                 <th>File</th>
+                                                <th>Upload Date</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
@@ -116,6 +117,39 @@
                                     </table>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                </div>          
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-title">
+                                <h4>Content List - History</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Username</th>
+                                                <th>Service</th>
+                                                <th>File</th>
+                                                <th>Upload Date</th>
+                                                <th>Seen Date</th>
+                                                <th>Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <%
+                                                String table_contentConfirm_history = td.getTableConfirmFileHistory(username);
+                                                out.println(table_contentConfirm_history);
+                                            %>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

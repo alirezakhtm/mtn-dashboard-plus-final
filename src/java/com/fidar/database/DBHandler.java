@@ -240,7 +240,8 @@ public class DBHandler {
             stm = conn.createStatement();
             rst = stm.executeQuery(query);
             while(rst.next()){
-                lst.get(rst.getInt("serviceCode"));
+                int serviceCode = rst.getInt("serviceCode");
+                lst.add(serviceCode);
             }
         }catch(SQLException e){
             System.err.println("[*] ERROR : DBHandler/getAllServiceCodeForAdmin : " + e);
@@ -281,20 +282,20 @@ public class DBHandler {
                     "'1')";
             stm = conn.createStatement();
             stm.execute(query);
-            this.close();
-            this.open();
-            query = "INSERT INTO `mobtakerandb`.`tbl_simple_user`\n" +
-                    "(" +
-                    "`username_simple`,\n" +
-                    "`username_admin`,\n" +
-                    "`service_name`)\n" +
-                    "VALUES\n" +
-                    "(" +
-                    "'"+username_newUser+"',\n" +
-                    "'"+adminUserName+"',\n" +
-                    "'"+serviceName+"')";
-            stm = conn.createStatement();
-            stm.execute(query);
+//            this.close();
+//            this.open();
+//            query = "INSERT INTO `mobtakerandb`.`tbl_simple_user`\n" +
+//                    "(" +
+//                    "`username_simple`,\n" +
+//                    "`username_admin`,\n" +
+//                    "`service_name`)\n" +
+//                    "VALUES\n" +
+//                    "(" +
+//                    "'"+username_newUser+"',\n" +
+//                    "'"+adminUserName+"',\n" +
+//                    "'"+serviceName+"')";
+//            stm = conn.createStatement();
+//            stm.execute(query);
             return true;
         }catch(SQLException e){
             System.err.println("[*] ERROR : DBHandler/addSimpleUser : " + e);
@@ -351,7 +352,7 @@ public class DBHandler {
         List<ConfirmContentFileObject> lstAnswer = new ArrayList<>();
         try{
             String query = "select * from `"+config.getDatabaseName()+"`.`tbl_content_file` where `admin_username` = '"+admin_username+"'"
-                    + " and `status` = '0'";
+                    + " and `status` = '-1'";
             stm = conn.createStatement();
             rst = stm.executeQuery(query);
             while(rst.next()){
@@ -361,6 +362,8 @@ public class DBHandler {
                 ccfo.setFileId(rst.getInt("indx"));
                 ccfo.setServiceName(rst.getString("service_name"));
                 ccfo.setUsername(rst.getString("username"));
+                ccfo.setSeenDate(rst.getString("review_date"));
+                ccfo.setStatus(-1);
                 lstAnswer.add(ccfo);
             }
         }catch(SQLException e){
@@ -413,6 +416,68 @@ public class DBHandler {
         }catch(SQLException e){
             System.err.println("[*] ERROR : DBHandler/activeUser : " + e);
         }
+    }
+
+    public String getServiceName(String admin_username) {
+        String serviceName = "";
+        try{
+            String query = "select * from `"+config.getDatabaseName()+"`.`tbl_service_tables` where `admin_username` = '"+admin_username+"'";
+            stm = conn.createStatement();
+            rst = stm.executeQuery(query);
+            while(rst.next()){
+                serviceName = rst.getString("tableName");
+            }
+        }catch(SQLException e){
+            System.err.println("[*] ERROR : DBHandler/getServiceName - 02 : " + e);
+        }
+        return serviceName;
+    }
+
+    public String getServiceName_simpleUser(String username) {
+        String serviceName = "";
+        try{
+            String query = "select * from `"+config.getDatabaseName()+"`.`tbl_simple_user` where `username_simple` = '"+username+"'";
+            stm = conn.createStatement();
+            rst = stm.executeQuery(query);
+            while(rst.next()){
+                serviceName = rst.getString("service_name");
+            }
+        }catch(SQLException e){
+            System.err.println("[*] ERROR : DBHandler/getServiceName - 02 : " + e);
+        }
+        return serviceName;
+    }
+
+    public void setFileConfirm(int fileId) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void setFileDenied(int fileId) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public List<ConfirmContentFileObject> getConfirmContentListHistory(String admin_username) {
+        List<ConfirmContentFileObject> lstAnswer = new ArrayList<>();
+        try{
+            String query = "select * from `"+config.getDatabaseName()+"`.`tbl_content_file` where `admin_username` = '"+admin_username+"'"
+                    + " and `status` <> '-1'";
+            stm = conn.createStatement();
+            rst = stm.executeQuery(query);
+            while(rst.next()){
+                ConfirmContentFileObject ccfo = new ConfirmContentFileObject();
+                ccfo.setDate(rst.getString("upload_date"));
+                ccfo.setFileAddress(rst.getString("file_address"));
+                ccfo.setFileId(rst.getInt("indx"));
+                ccfo.setServiceName(rst.getString("service_name"));
+                ccfo.setUsername(rst.getString("username"));
+                ccfo.setSeenDate(rst.getString("review_date"));
+                ccfo.setStatus(rst.getInt("status"));
+                lstAnswer.add(ccfo);
+            }
+        }catch(SQLException e){
+            System.err.println("[*] ERROR : DBHandler/getConfirmContentList : " + e);
+        }
+        return lstAnswer;
     }
     
 }

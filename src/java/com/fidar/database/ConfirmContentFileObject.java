@@ -15,6 +15,8 @@ public class ConfirmContentFileObject {
     private String fileAddress;
     private String date;
     private String serviceName;
+    private String seenDate;
+    private int status;
 
     public int getFileId() {
         return fileId;
@@ -55,5 +57,20 @@ public class ConfirmContentFileObject {
     public void setServiceName(String serviceName) {
         this.serviceName = serviceName;
     }
-    
+
+    public String getSeenDate() {
+        return seenDate;
+    }
+
+    public void setSeenDate(String seenDate) {
+        this.seenDate = seenDate;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
 }
