@@ -54,12 +54,12 @@ public class ContentConfirm extends HttpServlet {
                 switch(action.toLowerCase()){
                     case "confirm":
                         db.open();
-                        db.setFileConfirm(fileId);
+                        db.setFileConfirm(username, fileId);
                         db.close();
                         break;
                     case "denied":
                         db.open();
-                        db.setFileDenied(fileId);
+                        db.setFileDenied(username, fileId);
                         db.close();
                         break;
                 }

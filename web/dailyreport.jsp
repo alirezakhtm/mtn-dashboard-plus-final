@@ -91,7 +91,7 @@
             <!-- Container fluid  -->
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-md-6">
                         <div class="card">
                             <div class="card-title">
                                 <h4>Add Simple User</h4>
@@ -185,6 +185,16 @@
                             </div>
                         </div>
                     </div>
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-title">
+                                <h4>Bar chart</h4>
+                            </div>
+                            <div class="panel-body">
+                                <canvas id="barChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <!-- second row -->
                 <div class="row">
@@ -212,7 +222,7 @@
                                                 String serviceName = request.getParameter("serviceSelecter");
                                                 String table_details = "";
                                                 if(serviceName != ""){
-                                                    table_details = tableDataset.getReportDetails(date, serviceName);
+                                                    table_details = tableDataset.getTableDailyReport(date, serviceName);
                                                 }
                                                 out.println(table_details);
                                             %>
@@ -237,20 +247,6 @@
                         </div>
                     </div>
                 </div>
-                <!-- third row -->
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="card">
-                            <div class="card-title">
-                                <h4>Bar chart</h4>
-                            </div>
-                            <div class="panel-body">
-                                <canvas id="barChart"></canvas>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
             </div>
             <!-- End Container fluid  -->
             <!-- footer -->

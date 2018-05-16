@@ -94,7 +94,7 @@
                     <div class="col-md-4">
                         <div class="card">
                             <div class="card-title">
-                                <h4>Pie chart</h4>
+                                <h4>Service User</h4>
                             </div>
                             <div class="panel-body">
                                 <canvas id="pieChart"></canvas>
@@ -104,7 +104,7 @@
                     <div class="col-md-8">
                         <div class="card">
                             <div class="card-title">
-                                <h4>Bar chart</h4>
+                                <h4>Revenue chart</h4>
                             </div>
                             <div class="panel-body">
                                 <canvas id="barChart"></canvas>
@@ -118,7 +118,7 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-title">
-                                <h4>Top service in subscription users</h4>
+                                <h4>Top Subscription in Yesterday</h4>
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">

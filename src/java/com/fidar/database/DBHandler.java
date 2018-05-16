@@ -10,7 +10,9 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
@@ -132,6 +134,21 @@ public class DBHandler {
             System.err.println("[*] ERROR : DBHandler/getServiceName : " + e);
         }
         return serviceName;
+    }
+    
+    public int getServiceCode(String serviceName){
+        int serviceCode = 0;
+        try{
+            String query = "select * from `"+config.getDatabaseName()+"`.`tbl_services` where `serviceName` = '"+serviceName+"'";
+            stm = conn.createStatement();
+            rst = stm.executeQuery(query);
+            while(rst.next()){
+                serviceCode = rst.getInt("serviceCode");
+            }
+        }catch(SQLException e){
+            System.err.println("[*] ERROR : DBHandler/getServiceName : " + e);
+        }
+        return serviceCode;
     }
     
     public String getRevenue(int serviceCode){
@@ -448,12 +465,46 @@ public class DBHandler {
         return serviceName;
     }
 
-    public void setFileConfirm(int fileId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void setFileConfirm(String admin_username, int fileId) {
+        try{
+            String query_admin_permission = "select count(*) from `"+config.getDatabaseName()+"`.`tbl_content_file`"
+                    + " where `indx`='"+fileId+"' and `admin_username`='"+admin_username+"'";
+            stm = conn.createStatement();
+            rst = stm.executeQuery(query_admin_permission);
+            rst.next();
+            if(rst.getInt(1) > 0){
+                this.close();
+                this.open();
+                String query_confirm_file = "update `"+config.getDatabaseName()+"`.`tbl_content_file` set"
+                        + " `status`='1', `review_date`='"
+                        + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime()) + "' where `indx`='"+fileId+"'";
+                stm = conn.createStatement();
+                stm.execute(query_confirm_file);
+            }
+        }catch(SQLException e){
+            System.err.println("[*] ERROR - DBHandler/setFileConfirm : " + e);
+        }
     }
 
-    public void setFileDenied(int fileId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void setFileDenied(String admin_username, int fileId) {
+        try{
+            String query_admin_permission = "select count(*) from `"+config.getDatabaseName()+"`.`tbl_content_file`"
+                    + " where `indx`='"+fileId+"' and `admin_username`='"+admin_username+"'";
+            stm = conn.createStatement();
+            rst = stm.executeQuery(query_admin_permission);
+            rst.next();
+            if(rst.getInt(1) > 0){
+                this.close();
+                this.open();
+                String query_denied_file = "update `"+config.getDatabaseName()+"`.`tbl_content_file` set"
+                        + " `status`='0', `review_date`='"
+                        + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime()) + "' where `indx`='"+fileId+"'";
+                stm = conn.createStatement();
+                stm.execute(query_denied_file);
+            }
+        }catch(SQLException e){
+            System.err.println("[*] ERROR - DBHandler/setFileConfirm : " + e);
+        }
     }
 
     public List<ConfirmContentFileObject> getConfirmContentListHistory(String admin_username) {
@@ -478,6 +529,363 @@ public class DBHandler {
             System.err.println("[*] ERROR : DBHandler/getConfirmContentList : " + e);
         }
         return lstAnswer;
+    }
+    
+    
+    /**************************************************************************
+     *                                                                        *
+     *                      Functions for making report                       *
+     *                                                                        *
+     **************************************************************************/
+    public int getNumberOfSuccessfulPayments(String serviceName, String date){
+        int ans = 0;
+        try{
+            stm = conn.createStatement();
+            rst = stm.executeQuery("select sum(successNumber) from "+config.getDatabaseName()+"." + "tbl_report_" + serviceName
+                    + " where datePayment like '%" + date + "%'");
+            while(rst.next()){
+                ans = rst.getInt(1);
+            }
+        }catch(SQLException e){
+            System.err.println("SQL - 00 - Report : DBHandler_Native > " + e.getMessage());
+        }
+        return ans;
+    }
+    
+    public int getNumberOfFailedPayments(String serviceName, String date){
+        int ans = 0;
+        try{
+            stm = conn.createStatement();
+            rst = stm.executeQuery("select sum(failedNumber) from "+config.getDatabaseName()+"." + "tbl_report_" + serviceName
+                    + " where datePayment like '%" + date + "%'");
+            while(rst.next()){
+                ans = rst.getInt(1);
+            }
+        }catch(SQLException e){
+            System.err.println("SQL - 01 - Report : DBHandler_Native > " + e.getMessage());
+        }
+        return ans;
+    }
+    
+    public int getNumberOfUserForSpecificDate(String serviceName, String date){
+        int ans = 0;
+        try{
+            stm = conn.createStatement();
+            rst = stm.executeQuery("select customerNumber from "+config.getDatabaseName()+"." + "tbl_report_" + serviceName
+                    + " where datePayment like '%" + date + "%'");
+            while(rst.next()){
+                ans = rst.getInt(1);
+            }
+        }catch(SQLException e){
+            System.err.println("SQL - 03 - Report : DBHandler_Native > " + e.getMessage());
+        }
+        return ans;
+    }
+    
+    public String getCashOfSpecificDate(String serviceName, String date){
+        String ans = "0";
+        try{
+            stm = conn.createStatement();
+            rst = stm.executeQuery("select sum(cash) from "+config.getDatabaseName()+"." + "tbl_report_" + serviceName
+                    + " where datePayment like '%" + date + "%'");
+            while(rst.next()){
+                ans = rst.getString(1);
+            }
+        }catch(SQLException e){
+            System.err.println("[*] ERROR - DBHandler/getCashOfSpecificDate : " + e.getMessage());
+        }
+        return ans;
+    }
+    
+    /**
+     * @param customerNumber 
+     * @param cash 
+     * @param successNumber 
+     * @param failedNumber 
+     * @param priceList 
+     * @param successList 
+     * @param failedList 
+     * @param datePayment
+     * @param startTime 
+     * @param stopTime 
+     * @param jsonError 
+     * @param serviceName
+     */
+    public void saveReport(String serviceName, int customerNumber, int cash, int successNumber, int failedNumber,
+            String priceList, String successList, String failedList, String datePayment,
+            String startTime, String stopTime, String jsonError){
+        String query = "INSERT INTO `"+config.getDatabaseName()+"`.`" + "tbl_report_" + serviceName + "` " +
+                        "(`customerNumber`, " +
+                        "`cash`, " +
+                        "`successNumber`, " +
+                        "`failedNumber`, " +
+                        "`priceList`, " +
+                        "`successList`, " +
+                        "`failedList`, " +
+                        "`datePayment`, " +
+                        "`processStartedTime`, " +
+                        "`processFinishedTime`, " +
+                        "`failedErrorList`) " +
+                        "VALUES " +
+                        "('" + customerNumber + "', " +
+                        "'" + cash + "', " +
+                        "'" + successNumber + "', " +
+                        "'" + failedNumber + "', " +
+                        "'" + priceList + "', " +
+                        "'" + successList + "', " +
+                        "'" + failedList + "', " +
+                        "'" + datePayment + "', " +
+                        "'" + startTime + "', " +
+                        "'" + stopTime + "', " +
+                        "'" + jsonError + "')";
+        try{
+            stm = conn.createStatement();
+            stm.execute(query);
+        }catch(SQLException e){
+            System.err.println("SQL - 05 - Report : DBHandler_Native > " + e.getMessage());
+        }
+    }
+    
+    /**
+     * @param date
+     * @return 
+     */
+    public String getStartedTimeFromReport(String serviceName, String date){
+        String strAns = "";
+        try{
+            String query = "SELECT * FROM `"+config.getDatabaseName()+"`.`"+ "tbl_report_" + serviceName +"` WHERE `datePayment` = '" + date + "'";
+            stm = conn.createStatement();
+            rst = stm.executeQuery(query);
+            while(rst.next()){
+                strAns = rst.getString("processStartedTime");
+            }
+            return strAns;
+        }catch(SQLException e){
+            System.err.println("[*] ERROR - DBHandler/getStartedTimeFromReport : " + e.getMessage());
+            return "";
+        }
+    }
+    
+    /**
+     * @param date
+     * @return 
+     */
+    public String getFinishedTimeFromReport(String serviceName, String date){
+        String strAns = "";
+        try{
+            String query = "SELECT * FROM `"+config.getDatabaseName()+"`.`" + "tbl_report_" + serviceName + "` WHERE `datePayment` = '" + date + "'";
+            stm = conn.createStatement();
+            rst = stm.executeQuery(query);
+            while(rst.next()){
+                strAns = rst.getString("processFinishedTime");
+            }
+            return strAns;
+        }catch(SQLException e){
+            System.err.println("[*] ERROR - DBHandler/getFinishedTimeFromReport : " + e.getMessage());
+            return "";
+        }
+    }
+    
+    /**
+     * @param date
+     * @param serviceName 
+     * @return 
+     */
+    public Map<String, String> getErrorsFromReport(String serviceName, String date){
+        Map<String, String> map = new HashMap<>();
+        String strJSON = "";
+        try{
+            String query = "SELECT * FROM `"+config.getDatabaseName()+"`.`"+ "tbl_report_" + serviceName +"` WHERE `datePayment` = '" + date + "'";
+            stm = conn.createStatement();
+            rst = stm.executeQuery(query);
+            while(rst.next()){
+                strJSON = rst.getString("failedErrorList");
+            }
+            if(strJSON != null && !strJSON.equals("")){
+                strJSON = strJSON.replace("{ ", "").replace(" }", "");
+                String[] strArray = strJSON.split(",");
+                for(String s : strArray){
+                    String[] ss = s.split(":");
+                    if(ss.length >= 2){
+                        map.put(ss[0].replace("\"", ""), ss[1]);
+                    }
+                }
+            }
+            return map;
+        }catch(SQLException e){
+            System.err.println("[*] ERROR - DBHandler/getErrorsFromReport : " + e.getMessage());
+            return map;
+        }
+    }
+    
+    public ReportTbl getReportObjectForSpecificDate(String serviceName, String date){
+        ReportTbl report = new ReportTbl();
+        try{
+            String query = "SELECT * FROM `"+config.getDatabaseName()+"`.`" 
+                    + "tbl_report_" + serviceName 
+                    + "` WHERE `datePayment` like '%" + date + "%'";
+            stm = conn.createStatement();
+            rst = stm.executeQuery(query);
+            while(rst.next()){
+                int customerNumber = rst.getInt("customerNumber");
+                int cash = rst.getInt("cash");
+                String strLstPrice = rst.getString("priceList");
+                String strLstSuccess = rst.getString("successList");
+                String strLstFailed = rst.getString("failedList");
+                String datePayment = rst.getString("datePayment");
+                report.setCash(cash);
+                report.setCustomerNumber(customerNumber);
+                report.setDate(datePayment);
+                report.setLstFailed(convertStrToList(strLstFailed));
+                report.setLstPrice(convertStrToList(strLstPrice));
+                report.setLstSuccess(convertStrToList(strLstSuccess));
+            }
+        }catch(SQLException e){
+            System.err.println("[*] ERROR - DBHandler/getReportObjectForSpecificDate : " + e.getMessage());
+        }
+        return report;
+    }
+    
+    private List<Integer> convertStrToList(String str){
+        List<Integer> lst = new ArrayList<>();
+        String strTemp = str.substring(0, str.length()-1);
+        String[] strArray = strTemp.split(",");
+        for(String s : strArray){
+            lst.add(Integer.parseInt(s));
+        }
+        return lst;
+    }
+    
+    public int getActiveUserNumber(String serviceName) {
+        int ans = 0;
+        try{
+            String query_serviceCode = "select * from " + config.getDatabaseName() +".tbl_services where"
+                    + " `serviceName`='" + serviceName + "'";
+            // run above query and use its'result ...
+            stm = conn.createStatement();
+            rst = stm.executeQuery(query_serviceCode);
+            rst.next();
+            int iServiceCode = rst.getInt("serviceCode");         // reached result (above)
+            
+            this.close();
+            this.open();
+            
+            String queryFetchData = "select count(*) from " + config.getDatabaseName() + ".tbl_service_users where `status`='1'"
+                    + " and serviceCode='" + iServiceCode + "'";
+            stm = conn.createStatement();
+            rst = stm.executeQuery(queryFetchData);
+            rst.next();
+            ans = rst.getInt(1);
+            
+        }catch(SQLException e){
+            System.err.println("[*] ERROR - DBHandler/getActiveUserName : " + e.getMessage());
+        }        
+        return ans;
+    }
+    
+    public int getTotalSubUser(String serviceName){
+        int ans = 0;
+        int iServiceCode = 0;
+        
+        // get service code from tbl_services
+        try{
+            String query_serviceCode = "select * from " + config.getDatabaseName() + ".tbl_services where "
+                    + "serviceName='" + serviceName + "'";
+            stm = conn.createStatement();
+            rst = stm.executeQuery(query_serviceCode);
+            rst.next();
+            iServiceCode = rst.getInt("serviceCode");
+        }catch(SQLException e){
+            System.err.println("getTotalSubUser - DBHandler  - 01: " + e);
+        }
+        
+        close();
+        open();
+        
+        String query = "select count(*) from " + config.getDatabaseName() + ".tbl_service_users where serviceCode='" + iServiceCode + "'";
+        try{
+            stm = conn.createStatement();
+            rst = stm.executeQuery(query);
+            rst.next();
+            ans += rst.getInt(1);
+        }catch(SQLException e){
+            System.err.println("getTotalSubUser - DBHandler - 03 : " + e);
+        }
+        
+        // return sum of results from two tables above
+        return ans;
+    }
+    
+    /**
+     * @param date this parameter must similar whit this 2018-09-25
+     * @return Number of user that un-registered in this date.
+     */
+    public int getNewUnSubUser(String serviceName, String date){
+        int ans = 0;
+        int iServiceCode = 0;
+        
+        // get service code from tbl_services
+        try{
+            String query_serviceCode = "select * from " + config.getDatabaseName() + ".tbl_services where "
+                    + "serviceName='" + serviceName + "'";
+            stm = conn.createStatement();
+            rst = stm.executeQuery(query_serviceCode);
+            rst.next();
+            iServiceCode = rst.getInt("serviceCode");
+        }catch(SQLException e){
+            System.err.println("getNewUnSubUser - DBHandler  - 01 : " + e);
+        }
+        
+        close();
+        open();
+        
+        String query = "select count(*) from " + config.getDatabaseName() + ".tbl_service_users where"
+                + " serviceCode = '" + iServiceCode + "' and unRegDate like '%" + date + "%'";
+        try{
+            stm = conn.createStatement();
+            rst = stm.executeQuery(query);
+            rst.next();
+            ans = rst.getInt(1);
+        }catch(SQLException e){
+            System.err.println("getNewUnSubUser - DBHandler - 02 : " + e);
+        }
+        return ans;
+    }
+    
+    /**
+     * @param date this parameter must similar whit this 2018-09-25
+     * @return Number of user that registered in this date.
+     */
+    public int getNewSubUser(String serviceName, String date){
+        int ans = 0;
+        int iServiceCode = 0;
+        
+        // get service code from tbl_services
+        try{
+            String query_serviceCode = "select * from " + config.getDatabaseName() + ".tbl_services where "
+                    + "serviceName='" + serviceName + "'";
+            stm = conn.createStatement();
+            rst = stm.executeQuery(query_serviceCode);
+            rst.next();
+            iServiceCode = rst.getInt("serviceCode");
+        }catch(SQLException e){
+            System.err.println("getNewSubUser - DBHandler  - 01 : " + e);
+        }
+        
+        close();
+        open();
+        
+        String query = "select count(*) from " + config.getDatabaseName() + ".tbl_service_users "
+                + "where serviceCode = '" + iServiceCode + "' and regDate like '%" + date + "%'";
+        try{
+            stm = conn.createStatement();
+            rst = stm.executeQuery(query);
+            rst.next();
+            ans = rst.getInt(1);
+        }catch(SQLException e){
+            System.err.println("getNewSubUser - DBHandler_Native - 02 : " + e);
+        }
+        return ans;
     }
     
 }

@@ -7,10 +7,12 @@ package com.fidar.report.table;
 
 import com.fidar.database.ConfirmContentFileObject;
 import com.fidar.database.DBHandler;
+import com.fidar.database.ReportTbl;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -169,6 +171,21 @@ public class TableDataset {
             <td>15632</td>
         </tr>
         */
+        db.open();
+        ReportTbl report = db.getReportObjectForSpecificDate(serviceName, date);
+        db.close();
+        List<Integer> lstPrice = report.getLstPrice();
+        List<Integer> lstSuccessful = report.getLstSuccess();
+        List<Integer> lstFailed = report.getLstFailed();
+        StringBuilder sb = new StringBuilder();
+        for(int n = 0; n < lstPrice.size(); n++){
+            sb.append("<tr>");
+            sb.append("<th scope=\"row\">"+(n+1)+"</th>");
+            sb.append("<td>" + lstPrice.get(n) + "</td>");
+            sb.append("<td>" + lstSuccessful.get(n) + "</td>");
+            sb.append("<td>" + lstFailed.get(n) + "</td>");
+            sb.append("<tr>");
+        }
         return answer;
     }
     
@@ -181,6 +198,31 @@ public class TableDataset {
         <p><b>New Sub. User:</b> 180,000</p>
         <p><b>New UnSub. User:</b> 180,000</p>
         */
+        db.open();
+        int numberSuccessfulPayment = db.getNumberOfSuccessfulPayments(serviceName, date);
+        int numberFailedPayment = db.getNumberOfFailedPayments(serviceName, date);
+        String processStartedTime = db.getStartedTimeFromReport(serviceName, date);
+        String processFinishedTime = db.getFinishedTimeFromReport(serviceName, date);
+        String strCash = db.getCashOfSpecificDate(serviceName, date);
+        int serviceCode = db.getServiceCode(serviceName);
+        int newSubscription = db.getNewSubUser(serviceName, date);
+        int newUnSubscription = db.getNewUnSubUser(serviceName, date);
+        int totalSubscription = db.getTotalSubUser(serviceName);
+        int activeUser = db.getActiveUser(serviceCode);
+        db.close();
+        StringBuilder sb = new StringBuilder();
+        sb.append("<p><b>Service Name:</b> " + serviceName + "</p>");
+        sb.append("<p><b>Date:</b> "+date+"</p>");
+        sb.append("<p><b>Successful Payments:</b> " + numberSuccessfulPayment + "</p>");
+        sb.append("<p><b>Failed Payments:</b> " + numberFailedPayment + "</p>");
+        sb.append("<p><b>Proccess Start:</b> " + processStartedTime + "</p>");
+        sb.append("<p><b>Proccess Finished:</b> " + processFinishedTime + "</p>");
+        sb.append("<p><b>Revenue:</b> " + strCash + "</p>");
+        sb.append("<p><b>New Subscribtion:</b> " + newSubscription + "</p>");
+        sb.append("<p><b>New Unsubscribtion:</b> " + newUnSubscription + "</p>");
+        sb.append("<p><b>Total Subscribtion:</b> " + totalSubscription + "</p>");
+        sb.append("<p><b>Active User:</b> " + activeUser + "</p>");
+        answer = sb.toString();
         return answer;
     }
 }

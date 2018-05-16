@@ -19,7 +19,7 @@ public class ChartDataset {
     DBHandler db = new DBHandler();
     
     public String getDatasetPieChart_Admin(){
-        /*
+        
         db.open();
         List<Integer> allServiceCode = db.getAllServiceCode();
         db.close();
@@ -80,8 +80,8 @@ public class ChartDataset {
 "		}";
         
         return answer;
-        */
-        return "";
+        
+        //return "";
     }
 
     public String getDatasetPieChart_User(){
@@ -89,7 +89,7 @@ public class ChartDataset {
     }
     
     public String getDatasetBarChart_Admin(){
-        /*
+        
         db.open();
         List<Integer> allServiceCode = db.getAllServiceCode();
         db.close();
@@ -117,7 +117,7 @@ public class ChartDataset {
         
         String lable = "[ ";
         for(String s : lstServiceName){
-            lable = "\"" + s + "\", ";
+            lable += "\"" + s + "\", ";
         }
         lable = lable.substring(0, lable.lastIndexOf(","));
         lable += " ]";
@@ -137,8 +137,8 @@ public class ChartDataset {
         
         
         return answer;
-        */
-        return "";
+        
+        //return "";
     }
     
     public String getDatasetBarChart_User(){
@@ -166,6 +166,8 @@ public class ChartDataset {
             }
         ]
         */
-        return "";
+        String answer = "";
+        
+        return answer;
     }
 }

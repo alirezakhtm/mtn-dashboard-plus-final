@@ -29,7 +29,6 @@ public class SecurityOrder {
         HttpSession session = request.getSession();
         session.setAttribute("username", "none");
         session.setAttribute("password", "none");
-        try{Thread.sleep(2000);}catch(Exception e){}
     }
     
     public void pushUserInSession(HttpServletRequest request){
@@ -40,7 +39,6 @@ public class SecurityOrder {
         }
         session.setAttribute("username", request.getParameter("username"));
         session.setAttribute("password", request.getParameter("password"));
-        try{Thread.sleep(2000);}catch(Exception e){}
     }
     
 }
