@@ -8,6 +8,15 @@
 <%@page import="com.fidar.report.table.TableDataset"%>
 <%@page import="com.fidar.formal.input.MakeInput"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%
+    TableDataset tableDataset = new TableDataset();
+    String date = request.getParameter("year") + "-" + request.getParameter("month") + "-" + request.getParameter("day");
+    String serviceName = "";
+    try{
+        serviceName = request.getParameter("serviceSelecter");
+    }catch(Exception e){}
+    String table_details = "";
+%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -60,18 +69,18 @@
                     <!-- User profile and search -->
                     <ul class="navbar-nav my-lg-0">
                         <!-- Comment -->
-                        <li class="nav-item dropdown">
+<!--                        <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle text-muted text-muted  " href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="fa fa-bell"></i>
 				<div class="notify"> <span class="heartbit"></span> <span class="point"></span> </div>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right mailbox animated zoomIn">
                                 <%@include file="absolutemessage.jsp" %>
                             </div>
-                        </li>
+                        </li>-->
                         <!-- End Comment -->
                         <!-- Profile -->
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-muted  " href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="#" alt="user" class="profile-pic" /></a>
+                            <a class="nav-link dropdown-toggle text-muted  " href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="images/bookingSystem/3.png" alt="user" class="profile-pic" /></a>
                             <div class="dropdown-menu dropdown-menu-right animated zoomIn">
                                 <ul class="dropdown-user">
                                     <li><a href="LogOut"><i class="fa fa-power-off"></i> Logout</a></li>
@@ -94,7 +103,7 @@
                     <div class="col-md-6">
                         <div class="card">
                             <div class="card-title">
-                                <h4>Add Simple User</h4>
+                                <h4>Setting</h4>
                             </div>
                             <div class="panel-body">
                                 <form>
@@ -103,7 +112,7 @@
                                         <select class="form-control" name="serviceSelecter">
                                             <%
                                                 MakeInput makeInput = new MakeInput();
-                                                String selector_dailyReport_serviceName = makeInput.getSelector_AddSimpleUser(username);
+                                                String selector_dailyReport_serviceName = makeInput.getSelector_Services(username);
                                                 out.println(selector_dailyReport_serviceName);
                                             %>
                                         </select>
@@ -188,7 +197,7 @@
                     <div class="col-md-6">
                         <div class="card">
                             <div class="card-title">
-                                <h4>Bar chart</h4>
+                                <h4><% out.print(("Payment Chart " + date).replace("null-null-null", "")); %></h4>
                             </div>
                             <div class="panel-body">
                                 <canvas id="barChart"></canvas>
@@ -201,7 +210,7 @@
                     <div class="col-md-6">
                         <div class="card">
                             <div class="card-title">
-                                <h4>Table Basic </h4>
+                                <h4>Success and Fail Payment </h4>
 
                             </div>
                             <div class="card-body">
@@ -217,12 +226,11 @@
                                         </thead>
                                         <tbody>
                                             <%
-                                                TableDataset tableDataset = new TableDataset();
-                                                String date = request.getParameter("year") + "-" + request.getParameter("month") + "-" + request.getParameter("day");
-                                                String serviceName = request.getParameter("serviceSelecter");
-                                                String table_details = "";
-                                                if(serviceName != ""){
-                                                    table_details = tableDataset.getTableDailyReport(date, serviceName);
+                                                
+                                                if(serviceName != "" && serviceName != null){
+                                                    try{
+                                                        table_details = tableDataset.getTableDailyReport(date, serviceName);
+                                                    }catch(Exception e){}
                                                 }
                                                 out.println(table_details);
                                             %>
@@ -240,7 +248,9 @@
                             <div class="panel-body">
                                 <%
                                     String details = "";
-                                    details = tableDataset.getReportDetails(date, serviceName);
+                                    if(serviceName != "" && serviceName != null){
+                                        details = tableDataset.getReportDetails(date, serviceName);
+                                    }
                                     out.println(details);
                                 %>
                             </div>
@@ -271,40 +281,6 @@
     <script src="js/custom.min.js"></script>
     
     <script src="js/lib/chart-js/Chart.bundle.js"></script>
-    <script>
-        //pie chart
-	var ctx = document.getElementById( "pieChart" );
-	ctx.height = 300;
-	var myChart = new Chart( ctx, {
-		type: 'pie',
-		data: {
-			datasets: [ {
-				data: [ 45, 25, 20, 10 ],
-				backgroundColor: [
-                                    "rgba(0, 123, 255,0.9)",
-                                    "rgba(0, 123, 255,0.7)",
-                                    "rgba(0, 123, 255,0.5)",
-                                    "rgba(0,0,0,0.07)"
-                                ],
-				hoverBackgroundColor: [
-                                    "rgba(0, 123, 255,0.9)",
-                                    "rgba(0, 123, 255,0.7)",
-                                    "rgba(0, 123, 255,0.5)",
-                                    "rgba(0,0,0,0.07)"
-                                ]
-
-                            } ],
-			labels: [
-                            "green",
-                            "green",
-                            "green"
-                        ]
-		},
-		options: {
-			responsive: true
-		}
-	} );
-    </script>
     
     <script>
         //bar chart
@@ -315,8 +291,10 @@
             data: {
                 <%
                     ChartDataset chartDataset = new ChartDataset();
-                    String data = chartDataset.getDatasetBarChart_RevinueReport();
-                    out.println(data);
+                    if(serviceName != "" && serviceName != null){
+                        String data = chartDataset.getDatasetBarChart_RevinueReport(serviceName, date);
+                        out.println(data);
+                    }
                 %>
             },
             options: {

@@ -6,6 +6,7 @@
 package com.fidar.report.chart;
 
 import com.fidar.database.DBHandler;
+import com.fidar.database.ReportTbl;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -85,7 +86,7 @@ public class ChartDataset {
     }
 
     public String getDatasetPieChart_User(){
-        return null;
+        return this.getDatasetPieChart_Admin();
     }
     
     public String getDatasetBarChart_Admin(){
@@ -142,32 +143,64 @@ public class ChartDataset {
     }
     
     public String getDatasetBarChart_User(){
-        return null;
+        return this.getDatasetBarChart_Admin();
     }
     
-    public String getDatasetBarChart_RevinueReport(){
-        //?????????????
-        /*
-        labels: [ "3000", "2500", "2000", "1500", "1000", "500" ],
-        datasets: [
-            {
-                label: "Success",
-                data: [ 65, 59, 80, 81, 56, 55, 40 ],
-                borderColor: "rgba(0, 123, 255, 0.9)",
-                borderWidth: "0",
-                backgroundColor: "rgba(0, 123, 255, 0.5)"
-            },
-            {
-                label: "Fail",
-                data: [ 28, 48, 40, 19, 86, 27, 90 ],
-                borderColor: "rgba(0,0,0,0.09)",
-                borderWidth: "0",
-                backgroundColor: "rgba(200,50,0,0.5)"
-            }
-        ]
-        */
-        String answer = "";
+    public String getDatasetBarChart_RevinueReport(String serviceName, String date){
         
+        db.open();
+        ReportTbl reportTbl = db.getReportObjectForSpecificDate(serviceName, date);
+        db.close();
+        List<Integer> lstPrice = reportTbl.getLstPrice();
+        List<Integer> lstSuccessPaymet = reportTbl.getLstSuccess();
+        List<Integer> lstFailedPayment = reportTbl.getLstFailed();
+        // create price list according to javascript syntax for show data
+        String strPrice = "";
+        if(lstPrice != null){
+            for(int p : lstPrice){
+                strPrice += "\""+p+"\",";
+            }
+            strPrice = "[" + strPrice.substring(0, strPrice.lastIndexOf(",")) + "]";
+        }
+        
+        // create success list according to javascript syntax for show data
+        String strSuccess = "";
+        if(lstSuccessPaymet != null){
+            for(Integer s : lstSuccessPaymet){
+                strSuccess += s + ", ";
+            }
+            strSuccess = "[" + strSuccess.substring(0, strSuccess.lastIndexOf(",")) + "]";
+        }
+        
+        // create failed list according to javascript syntax for show data
+        String strFailed = "";
+        if(lstFailedPayment != null){
+            for(Integer f : lstFailedPayment){
+                strFailed += f + ", ";
+            }
+            strFailed = "[" + strFailed.substring(0, strFailed.lastIndexOf(",")) + "]";
+        }
+        
+        
+        String answer = 
+                "labels: %s,\n" +
+                "datasets: [\n" +
+                "    {\n" +
+                "        label: \"Success\",\n" +
+                "        data: %s,\n" +
+                "        borderColor: \"rgba(0, 123, 255, 0.9)\",\n" +
+                "        borderWidth: \"0\",\n" +
+                "        backgroundColor: \"rgba(0, 123, 255, 0.5)\"\n" +
+                "    },\n" +
+                "    {\n" +
+                "        label: \"Fail\",\n" +
+                "        data: %s,\n" +
+                "        borderColor: \"rgba(0,0,0,0.09)\",\n" +
+                "        borderWidth: \"0\",\n" +
+                "        backgroundColor: \"rgba(200,50,0,0.5)\"\n" +
+                "    }\n" +
+                "]";
+        answer = String.format(answer, strPrice, strSuccess, strFailed);
         return answer;
     }
 }

@@ -25,6 +25,13 @@ public class SecurityOrder {
         return answer;
     }
     
+    public ConstantParameters whoIsUserName(String username){
+        db.open();
+        ConstantParameters answer = db.returnPeriorityAccordingToUsername(username);
+        db.close();
+        return answer;
+    }
+    
     public void logOutUser(HttpServletRequest request){
         HttpSession session = request.getSession();
         session.setAttribute("username", "none");
@@ -39,6 +46,15 @@ public class SecurityOrder {
         }
         session.setAttribute("username", request.getParameter("username"));
         session.setAttribute("password", request.getParameter("password"));
+    }
+
+    public boolean UserStatus(HttpServletRequest request) {
+        String username = request.getParameter("username");
+        boolean felag = false;
+        db.open();
+        felag = db.getUserStause(username);
+        db.close();
+        return felag;
     }
     
 }

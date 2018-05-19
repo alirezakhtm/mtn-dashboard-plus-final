@@ -3,6 +3,7 @@
     Created on : May 1, 2018, 3:31:32 PM
     Author     : alirzea
 --%>
+<%--
 
 <ul>
     <li>
@@ -44,3 +45,5 @@
         <a class="nav-link text-center" href="javascript:void(0);"> <strong>Check all notifications</strong> <i class="fa fa-angle-right"></i> </a>
     </li>
 </ul>
+
+--%>

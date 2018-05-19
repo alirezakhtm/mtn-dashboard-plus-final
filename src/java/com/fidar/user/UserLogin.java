@@ -14,6 +14,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -39,13 +40,22 @@ public class UserLogin extends HttpServlet {
         
         
         securityOrder.pushUserInSession(request);
-        
-        try{Thread.sleep(2000);}catch(Exception e){}
-        
+                
         // proccess for identification and redirect to correct page
         
-        RequestDispatcher dispatcher = request.getRequestDispatcher("dashboard.jsp");
-        dispatcher.forward(request, response);
+        boolean isActive = securityOrder.UserStatus(request);
+        
+        if(isActive){
+            RequestDispatcher dispatcher = request.getRequestDispatcher("dashboard.jsp");
+            dispatcher.forward(request, response);
+        }else{
+            HttpSession session = request.getSession();
+            session.setAttribute("message", "<br/>- Username or Password is <b>wrong</b>, please close your internet browser and try again."
+                    + "<br/>- Your accoutn have been <b>disabled</b> by servic admin, report this problem to your administrator."
+                    + "<br/>- If you have logout recently, for security problem you cant access to panel whit same session, therefore close internet browser and try again.");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("loginpage.jsp");
+            dispatcher.forward(request, response);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

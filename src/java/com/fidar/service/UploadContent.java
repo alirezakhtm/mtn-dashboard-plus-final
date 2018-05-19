@@ -7,9 +7,11 @@ package com.fidar.service;
 
 import com.fidar.database.ConstantParameters;
 import com.fidar.security.SecurityOrder;
+import java.io.File;
 import java.io.IOException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.ServletInputStream;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -36,6 +38,22 @@ public class UploadContent extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        
+        try{
+            String fileAddress = request.getParameter("file");
+            System.out.println("[>>] File address: " + fileAddress);
+            ServletInputStream input = request.
+        }catch(Exception e){
+            
+        }
+        
+        
+        
+        
+        
+        
+        
         HttpSession session = request.getSession();
         String username = (String)session.getAttribute("username");
         String password = (String)session.getAttribute("password");

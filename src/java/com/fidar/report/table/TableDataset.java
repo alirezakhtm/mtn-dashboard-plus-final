@@ -178,14 +178,17 @@ public class TableDataset {
         List<Integer> lstSuccessful = report.getLstSuccess();
         List<Integer> lstFailed = report.getLstFailed();
         StringBuilder sb = new StringBuilder();
-        for(int n = 0; n < lstPrice.size(); n++){
-            sb.append("<tr>");
-            sb.append("<th scope=\"row\">"+(n+1)+"</th>");
-            sb.append("<td>" + lstPrice.get(n) + "</td>");
-            sb.append("<td>" + lstSuccessful.get(n) + "</td>");
-            sb.append("<td>" + lstFailed.get(n) + "</td>");
-            sb.append("<tr>");
+        if(!lstPrice.isEmpty()){
+            for(int n = 0; n < lstPrice.size(); n++){
+                sb.append("<tr>");
+                sb.append("<th scope=\"row\">"+(n+1)+"</th>");
+                sb.append("<td>" + lstPrice.get(n) + "</td>");
+                sb.append("<td>" + lstSuccessful.get(n) + "</td>");
+                sb.append("<td>" + lstFailed.get(n) + "</td>");
+                sb.append("<tr>");
+            }
         }
+        answer = sb.toString();
         return answer;
     }
     

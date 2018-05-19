@@ -61,7 +61,7 @@
                     </ul>
                 </li>
                 <%
-                    if(answer.equals(ConstantParameters.USER_ADMIN) || answer.equals(ConstantParameters.USER_SIMPLE)) {
+                    if(answer.equals(ConstantParameters.USER_SIMPLE)) {
                 %>
                 <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-suitcase"></i><span class="hide-menu">Content</span></a>
                     <ul aria-expanded="false" class="collapse">

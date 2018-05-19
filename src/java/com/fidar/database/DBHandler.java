@@ -91,6 +91,36 @@ public class DBHandler {
         return answer;
     }
     
+    public ConstantParameters returnPeriorityAccordingToUsername(String username){
+        // return periority of user for username and password
+        ConstantParameters answer;
+        answer = ConstantParameters.USER_UNKNOWN;
+        try{
+            String query = "select * from `" + config.getDatabaseName() + "`.`tbl_all_user` where `username` = '" + username + "'";
+            stm = conn.createStatement();
+            rst = stm.executeQuery(query);
+            rst.next();
+            int iPeriority = rst.getInt("periority");
+            switch(iPeriority){
+                case 0:
+                    answer = ConstantParameters.USER_MASTER;
+                    break;
+                case 1:
+                    answer = ConstantParameters.USER_ADMIN;
+                    break;
+                case 2:
+                    answer = ConstantParameters.USER_SIMPLE;
+                    break;
+                default:
+                    answer = ConstantParameters.USER_UNKNOWN;
+                    break;
+            }
+        }catch(SQLException e){
+            System.err.println("[*] ERROR : DBHandler/returnPeriorityUser : " + e);
+        }
+        return answer;
+    }
+    
     public List<Integer> getAllServiceCode() {
         List<Integer> lstAllServiceCode = new ArrayList<>();
         try{
@@ -262,6 +292,27 @@ public class DBHandler {
             }
         }catch(SQLException e){
             System.err.println("[*] ERROR : DBHandler/getAllServiceCodeForAdmin : " + e);
+        }
+        return lst;
+    }
+    
+    public List<Integer> getAllServiceCodeForSimpleUser(String username){
+        List<Integer> lst  = new ArrayList<>();
+        try{
+            String query = "select * from `"+config.getDatabaseName()+"`.`tbl_simple_user` where `username_simple` = '"+username+"'";
+            stm = conn.createStatement();
+            rst = stm.executeQuery(query);
+            rst.next();
+            String strServiceName = rst.getString("service_name");
+            this.close();
+            this.open();
+            String query_getServiceCode = "select * from `"+config.getDatabaseName()+"`.`tbl_services` where `serviceName`='"+strServiceName+"'";
+            stm = conn.createStatement();
+            rst = stm.executeQuery(query_getServiceCode);
+            rst.next();
+            lst.add(rst.getInt("serviceCode"));
+        }catch(SQLException e){
+            System.err.println("[*] ERROR : DBHandler/getAllServiceCodeForSimpleUser : " + e);
         }
         return lst;
     }
@@ -886,6 +937,21 @@ public class DBHandler {
             System.err.println("getNewSubUser - DBHandler_Native - 02 : " + e);
         }
         return ans;
+    }
+
+    public boolean getUserStause(String username) {
+        int status = 0;
+        try{
+            String query = "select * from `"+config.getDatabaseName()+"`.`tbl_all_user` where `username`='"+username+"'";
+            stm = conn.createStatement();
+            rst = stm.executeQuery(query);
+            while(rst.next()){
+                status = rst.getInt("status");
+            }
+        }catch(SQLException e){
+            System.err.println("[*] ERROR - DBHandler/getUserStatus : " + e);
+        }
+        return status == 1;
     }
     
 }

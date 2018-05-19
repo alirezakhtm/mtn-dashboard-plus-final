@@ -4,6 +4,7 @@
     Author     : alirzea
 --%>
 
+<%@page import="com.fidar.formal.input.MakeInput"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -57,18 +58,18 @@
                     <!-- User profile and search -->
                     <ul class="navbar-nav my-lg-0">
                         <!-- Comment -->
-                        <li class="nav-item dropdown">
+<!--                        <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle text-muted text-muted  " href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="fa fa-bell"></i>
 				<div class="notify"> <span class="heartbit"></span> <span class="point"></span> </div>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right mailbox animated zoomIn">
                                 <%@include file="absolutemessage.jsp" %>
                             </div>
-                        </li>
+                        </li>-->
                         <!-- End Comment -->
                         <!-- Profile -->
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-muted  " href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="#" alt="user" class="profile-pic" /></a>
+                            <a class="nav-link dropdown-toggle text-muted  " href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="images/bookingSystem/3.png" alt="user" class="profile-pic" /></a>
                             <div class="dropdown-menu dropdown-menu-right animated zoomIn">
                                 <ul class="dropdown-user">
                                     <li><a href="LogOut"><i class="fa fa-power-off"></i> Logout</a></li>
@@ -91,17 +92,18 @@
                     <div class="col-md-6">
                         <div class="card">
                             <div class="card-title">
-                                <h4>Add Simple User</h4>
+                                <h4>Upload Content</h4>
                             </div>
                             <div class="panel-body">
                                 <form>
                                     <div class="from-group">
                                         <label>Service</label>
                                         <select class="form-control" name="serviceSelecter">
-                                            <option>Admin1</option>
-                                            <option>Admin2</option>
-                                            <option>Admin3</option>
-                                            <option>Asmin4</option>
+                                            <%
+                                                MakeInput makeInput = new MakeInput();
+                                                String selector_dailyReport_serviceName = makeInput.getSelector_Services(username);
+                                                out.println(selector_dailyReport_serviceName);
+                                            %>
                                         </select>
                                     </div>
                                     <br/>

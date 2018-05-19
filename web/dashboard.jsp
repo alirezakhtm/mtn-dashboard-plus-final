@@ -58,18 +58,18 @@
                     <!-- User profile and search -->
                     <ul class="navbar-nav my-lg-0">
                         <!-- Comment -->
-                        <li class="nav-item dropdown">
+<!--                        <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle text-muted text-muted  " href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="fa fa-bell"></i>
 				<div class="notify"> <span class="heartbit"></span> <span class="point"></span> </div>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right mailbox animated zoomIn">
                                 <%@include file="absolutemessage.jsp" %>
                             </div>
-                        </li>
+                        </li>-->
                         <!-- End Comment -->
                         <!-- Profile -->
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-muted  " href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="#" alt="user" class="profile-pic" /></a>
+                            <a class="nav-link dropdown-toggle text-muted  " href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="images/bookingSystem/3.png" alt="user" class="profile-pic" /></a>
                             <div class="dropdown-menu dropdown-menu-right animated zoomIn">
                                 <ul class="dropdown-user">
                                     <li><a href="LogOut"><i class="fa fa-power-off"></i> Logout</a></li>
@@ -134,11 +134,11 @@
                                         <tbody>
                                             <%
                                                 TableDataset tds = new TableDataset();
-                                                if(answer.equals(ConstantParameters.USER_ADMIN) || answer.equals(ConstantParameters.USER_MASTER)){
+                                                //if(answer.equals(ConstantParameters.USER_ADMIN) || answer.equals(ConstantParameters.USER_MASTER)){
                                                     out.print(
                                                             tds.getTableTopServices_Subscribtion()
                                                     );
-                                                }
+                                                //}
                                             %>
                                         </tbody>
                                     </table>
@@ -146,51 +146,6 @@
                             </div>
                         </div>
                     </div>
-<!--                    <div class="col-md-6">
-                        <div class="card">
-                            <div class="card-title">
-                                <h4>Table of current services </h4>
-                            </div>
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <table class="table">
-                                        <thead>
-                                            <tr>
-                                                <th>#</th>
-                                                <th>Name</th>
-                                                <th>Owner</th>
-                                                <th>Admin</th>
-                                                <th>Revenue</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <th scope="row">1</th>
-                                                <td>Golnakhorim</td>
-                                                <td><span class="badge badge-primary">Morteza</span></td>
-                                                <td>Vasfa</td>
-                                                <td class="color-primary">6,000,000 T</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">2</th>
-                                                <td>Golnakhorim</td>
-                                                <td><span class="badge badge-primary">Morteza</span></td>
-                                                <td>Vasfa</td>
-                                                <td class="color-primary">6,000,000 T</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">3</th>
-                                                <td>Golnakhorim</td>
-                                                <td><span class="badge badge-inverse">Morteza</span></td>
-                                                <td>Vasfa</td>
-                                                <td class="color-primary">6,000,000 T</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>-->
                 </div>
                 <!-- Finish table of services -->
                 <!-- End PAge Content -->
@@ -217,17 +172,6 @@
     <!--Custom JavaScript -->
     <script src="js/custom.min.js"></script>
     <!-- Pie chart - java script file-->
-    <!--<script src="js/lib/flot-chart/jquery.flot.pie.js"></script>-->
-    <!--  flot-chart js -->
-<!--    <script src="js/lib/flot-chart/excanvas.min.js"></script>
-    <script src="js/lib/flot-chart/jquery.flot.js"></script>
-    <script src="js/lib/flot-chart/jquery.flot.pie.js"></script>
-    <script src="js/lib/flot-chart/jquery.flot.time.js"></script>
-    <script src="js/lib/flot-chart/jquery.flot.stack.js"></script>
-    <script src="js/lib/flot-chart/jquery.flot.resize.js"></script>
-    <script src="js/lib/flot-chart/jquery.flot.crosshair.js"></script>
-    <script src="js/lib/flot-chart/curvedLines.js"></script>
-    <script src="js/lib/flot-chart/flot-tooltip/jquery.flot.tooltip.min.js"></script>-->
     <script src="js/lib/chart-js/Chart.bundle.js"></script>
     <script>
         //pie chart

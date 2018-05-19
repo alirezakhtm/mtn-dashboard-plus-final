@@ -45,6 +45,17 @@
                 <div class="row justify-content-center">
                     <div class="col-lg-4">
                         <div class="login-content card">
+                            <%
+                                String msg = (String)session.getAttribute("message");
+                                if(msg != null && msg != ""){
+                            %>
+                            <div class="alert alert-danger alert-dismissible fade show">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                <strong>ERROR!</strong> <% out.print(msg); %>
+                            </div>
+                            <%
+                                }
+                            %>
                             <div class="login-form">
                                 <h4>Login</h4>
                                 <form action="UserLogin" method="post">
