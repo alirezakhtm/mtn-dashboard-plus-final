@@ -138,19 +138,23 @@ public class TableDataset {
                     status = "Denied";
                     break;
                 case 1:
-                    status = "Confirm - Pendding";
+                    status = "Confirm - Pending";
                     break;
                 case 2:
                     status = "Confirm - Proccessing";
                     break;
                 case 3:
                     status = "Confirm - Successfully Loaded";
+                    break;
+                case 4:
+                    status = "System Denied - Bad Format !";
+                    break;
             }
             answer += "<tr>\n" +
                     "<th scope=\"row\">" + Counter + "</th>\n" +
                         "<td>" + ccfo.getUsername() + "</td>\n" +
                         "<td>" + ccfo.getServiceName() + "</td>\n" +
-                        "<td><a href=\"" + ccfo.getFileAddress() + "\" class=\"color-primary\"><span class=\"icon-flag\"></span> File</a></td>\n" +
+                        "<td><a href=\"DownloadFile?file=" + ccfo.getFileAddress() + "\" class=\"color-primary\"><span class=\"icon-flag\"></span> File</a></td>\n" +
                         "<td>" + ccfo.getDate() + "</td>" +
                         "<td>" + ccfo.getSeenDate() + "</td>" +
                         "<td>" + status + "</td>\n" +

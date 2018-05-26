@@ -96,7 +96,7 @@
                             String msg = (String)request.getAttribute("message");
                             if(msg != null && msg != ""){
                         %>
-                        <div class="alert alert-danger alert-dismissible fade show">
+                        <div class="alert alert-primary alert-dismissible fade show">
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
                             <% out.print(msg); %>
                         </div>
