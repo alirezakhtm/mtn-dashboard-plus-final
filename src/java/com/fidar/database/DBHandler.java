@@ -582,6 +582,47 @@ public class DBHandler {
         return lstAnswer;
     }
     
+    /**************************************************************************
+     *                                                                        *
+     *                              File Handling                             *
+     *                                                                        *
+     * ************************************************************************/
+    
+    public void saveFileContent(String username, String fileAddress, int serviceCode, String serviceName){
+        try{
+            // find admin username for this service
+            String queryAdminUsername = "select `admin_username` from `"+config.getDatabaseName()+"`.`tbl_service_tables` where `serviceCode`='"+serviceCode+"'";
+            stm = conn.createStatement();
+            rst = stm.executeQuery(queryAdminUsername);
+            rst.next();
+            String adminUsername = rst.getString(1);
+            this.close();
+            this.open();
+            String queryFileContent = "INSERT INTO `mobtakerandb`.`tbl_content_file`\n" +
+                    "(" +
+                    "`username`,\n" +
+                    "`file_address`,\n" +
+                    "`upload_date`,\n" +
+                    "`status`,\n" +
+                    "`review_date`,\n" +
+                    "`admin_username`,\n" +
+                    "`service_name`)\n" +
+                    "VALUES\n" +
+                    "(" +
+                    "'"+username+"',\n" +
+                    "'"+fileAddress+"',\n" +
+                    "'"+new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime())+"',\n" +
+                    "'-1',\n" +
+                    "'',\n" +
+                    "'"+adminUsername+"',\n" +
+                    "'"+serviceName+"')";
+            stm = conn.createStatement();
+            stm.execute(queryFileContent);
+            
+        }catch(Exception e){
+            System.err.println("[*] ERROR - DBHandler/saveFileContent : " + e);
+        }
+    }
     
     /**************************************************************************
      *                                                                        *

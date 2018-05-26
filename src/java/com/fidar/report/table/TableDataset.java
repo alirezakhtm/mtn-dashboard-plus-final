@@ -113,7 +113,7 @@ public class TableDataset {
                     "<th scope=\"row\">" + Counter + "</th>\n" +
                         "<td>" + ccfo.getUsername() + "</td>\n" +
                         "<td>" + ccfo.getServiceName() + "</td>\n" +
-                        "<td><a href=\"" + ccfo.getFileAddress() + "\" class=\"color-primary\"><span class=\"icon-flag\"></span> File</a></td>\n" +
+                        "<td><a href=\"DownloadFile?file=" + ccfo.getFileAddress() + "\" class=\"color-primary\"><span class=\"icon-flag\"></span> File</a></td>\n" +
                         "<td>" + ccfo.getDate() + "</td>" +
                         "<td><a href=\"ContentConfirm?action=confirm&fileId=" + ccfo.getFileId() +
                             "\" class=\"btn btn-success\">Confirm</a> <a href=\"ContentConfirm?action=denied&fileId=" +

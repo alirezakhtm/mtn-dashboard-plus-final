@@ -49,7 +49,8 @@ public class SecurityOrder {
     }
 
     public boolean UserStatus(HttpServletRequest request) {
-        String username = request.getParameter("username");
+        HttpSession session = request.getSession();
+        String username = (String)session.getAttribute("username");
         boolean felag = false;
         db.open();
         felag = db.getUserStause(username);

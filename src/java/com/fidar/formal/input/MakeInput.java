@@ -43,4 +43,31 @@ public class MakeInput {
         }
         return answer;
     }
+    
+    public String getSelector_AddSimpleUser(String username){
+        String answer = "";
+        ConstantParameters constant = (new SecurityOrder()).whoIsUserName(username);
+        if(constant.equals(ConstantParameters.USER_SIMPLE)){
+            db.open();
+            List<Integer> lstServiceCode = db.getAllServiceCodeForSimpleUser(username);
+            db.close();
+            for(int n : lstServiceCode){
+                db.open();
+                String serviceName = db.getServiceName(n);
+                db.close();
+                answer += "<option>" + serviceName + "</option>\n";
+            }
+        }else{
+            db.open();
+            List<Integer> lstServiceCode = db.getAllServiceCodeForAdmin(username);
+            db.close();
+            for(int n : lstServiceCode){
+                db.open();
+                String serviceName = db.getServiceName(n);
+                db.close();
+                answer += "<option>" + serviceName + "</option>\n";
+            }
+        }
+        return answer;
+    }
 }

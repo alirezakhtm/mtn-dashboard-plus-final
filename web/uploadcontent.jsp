@@ -89,13 +89,31 @@
             <!-- Container fluid  -->
             <div class="container-fluid">
                 <div class="row">
+                    
+                    <div class="col-md-12">
+                        <br/>
+                        <%
+                            String msg = (String)request.getAttribute("message");
+                            if(msg != null && msg != ""){
+                        %>
+                        <div class="alert alert-danger alert-dismissible fade show">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+                            <% out.print(msg); %>
+                        </div>
+                        <%
+                            }
+                        %>
+                    </div>
+                </div>
+                <div class="row">
+                    
                     <div class="col-md-6">
                         <div class="card">
                             <div class="card-title">
                                 <h4>Upload Content</h4>
                             </div>
                             <div class="panel-body">
-                                <form>
+                                <form method="post" enctype="multipart/form-data">
                                     <div class="from-group">
                                         <label>Service</label>
                                         <select class="form-control" name="serviceSelecter">
@@ -110,8 +128,12 @@
                                     <div class="fallback">
                                         <input name="file" type="file" class="btn btn-success"/>
                                     </div>
+                                    <a class="badge badge-primary" href="files/Template.csv">Template File</a>
                                     <br/>
                                     <button type="submit" class="btn btn-success">Start Upload</button>
+                                    <input type="hidden" value="upload" name="action">
+                                    
+                                    
                                 </form>
                             </div>
                         </div>
